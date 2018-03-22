@@ -64,4 +64,9 @@ function getDataUser($id){
 function getPlaceInfo($category){
     include_once("db_model.php");
     $statement=$pdo->prepare("SELECT place_name,place_desc,place_added_by,place_like,place_dislike FROM places WHERE place_cat=?");
+    $statement->execute(array($category));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result=$row;
+    }
+    return $result;
 }
