@@ -23,3 +23,4 @@ require_once ("views/users/" .$page.".php");
 require_once("views/layouts/footer.php");
 
 echo "Pyrva proba";
+echo "vtora proba";
