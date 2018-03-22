@@ -1,5 +1,5 @@
 <?php
-const DB_NAME = "shmataroci";
+const DB_NAME = "projectdb";
 const DB_IP = "127.0.0.1";
 const DB_PORT = "3306";
 const DB_USER = "root";

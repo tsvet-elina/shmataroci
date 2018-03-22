@@ -64,10 +64,11 @@ function getDataUser($id){
 function getPlaceInfo($category){
     $result=[];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT place_name,place_desc,place_added_by,place_like,place_dislike FROM places WHERE place_cat=?");
+    $statement=$pdo->prepare("SELECT place_name,description,place_added_by,place_like,place_dislike FROM places WHERE category=?");
     $statement->execute(array($category));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
-        $result["name"]=$row["place_name"];
+        $result[]=$row;
+
     }
     return $result;
 }
