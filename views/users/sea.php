@@ -8,7 +8,14 @@
     request.onreadystatechange=function (){
         if(request.status===200 && request.readyState===4){
             var response=JSON.parse(this.responseText);
-          document.getElementById("info").innerHTML=response["name"];
+            for(var each in response){
+                for(var item in response[each]){
+                    document.getElementById("info").innerHTML+=" "+response[each][item];
+                }
+            }
+
+
+
         }
     }
     request.send();
