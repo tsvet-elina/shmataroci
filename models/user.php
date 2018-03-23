@@ -66,11 +66,22 @@ function getPlaceInfo($category)
 {
     $result = [];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT place_name,description,place_added_by,place_like,place_dislike FROM places WHERE category=?");
+    $statement=$pdo->prepare("SELECT id,place_name,description,place_added_by,place_like,place_dislike FROM places WHERE category=?");
     $statement->execute(array($category));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
 
     }
     return $result;
+}
+
+function insertComment($id,$comment,$user_id){
+    include_once("db_model.php");
+    $statement=$pdo->prepare("INSERT INTO comments(user_id,place_id,comment_place) VALUES (?, ?, ?)");
+    $statement->execute(array($user_id,$id,$comment));
+    if($statement->fetch()>0){
+        return true;
+    }else{
+        return false;
+    }
 }
