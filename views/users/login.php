@@ -4,7 +4,6 @@
 //
 //?>
 
-<form method="post" action="controllers/login_controller.php">
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
@@ -14,7 +13,9 @@
         <input type="password" name="password" id="password">
     </div>
     <div>
-        <input type="submit" name="login" value="Login">
+        <button onclick="doLogin()">Login</button>
     </div>
-</form>
+    <div id="invalid" style="visibility: hidden"></div>
 <a href="index.php?page=registration">Register</a>
+
+

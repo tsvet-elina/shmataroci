@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="assets/javascripts/application.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,6 +15,15 @@
     <a href="index.php?page=places">Забележителности</a>
     <a href="index.php?page=add">Добави</a>
     <a href="index.php?page=edit">Редактирай профил</a>
-    <a href="index.php?page=login">Вход</a>
+    <?php
+    if (isset($_SESSION["user"])) {
+        ?>
+        <a href="index.php?page=logout">Изход</a>
+    <?php } else {
+        ?>
+        <a href="index.php?page=login">Вход</a>
+    <?php }
+    ?>
+
 
 </nav>

@@ -9,7 +9,7 @@ function login($email, $password)
     $statement->execute([$email, $password]);
     $row = $statement->fetch(PDO::FETCH_ASSOC);
     if (empty($row)) {
-        return 0;
+        return null;
     } else {
         return $row;
     }
@@ -34,8 +34,8 @@ function addUserToDB($username, $password, $email, $gender, $age, $image)
 
             return 1;
         }
-    }catch(Exception $e){
-        echo "greshkata e slednata:". $e->getMessage();
+    } catch (Exception $e) {
+        echo "greshkata e slednata:" . $e->getMessage();
     }
 
 }
@@ -46,28 +46,30 @@ function editUserData($username, $password, $email, $gender, $age, $image, $id)
 {
     include_once("db_model.php");
     $update = $pdo->prepare("UPDATE users  SET username = ?, password =?,email =?,
-gender=?,age=?,image=?WHERE user_id = ?");
-    $update->execute([$username, $password, $email, $gender, $age, $image, $id]);
+gender=?,age=?,image=? , is_admin =? WHERE user_id = ?");
+    $update->execute([$username, $password, $email, $gender, $age, $image,0, $id]);
     //$affectedRow = $update->fetch();
     // return $affectedRow;
 
 }
 
-function getDataUser($id){
+function getDataUser($id)
+{
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT * from users WHERE user_id=?");
+    $statement = $pdo->prepare("SELECT * from users WHERE user_id=?");
     $statement->execute([$id]);
-    $info=$statement->fetch(PDO::FETCH_ASSOC);
+    $info = $statement->fetch(PDO::FETCH_ASSOC);
     return $info;
 }
 
-function getPlaceInfo($category){
-    $result=[];
+function getPlaceInfo($category)
+{
+    $result = [];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT place_name,place_desc,place_added_by,place_like,place_dislike FROM places WHERE place_cat=?");
+    $statement = $pdo->prepare("SELECT place_name,place_desc,place_added_by,place_like,place_dislike FROM places WHERE place_cat=?");
     $statement->execute(array($category));
-    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
-        $result["name"]=$row["place_name"];
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $result["name"] = $row["place_name"];
     }
     return $result;
 }

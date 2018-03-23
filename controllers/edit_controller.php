@@ -22,6 +22,4 @@ if (isset($_GET["try"])) {
     $user_id = $_SESSION["user"]["user_id"];
     $result = getDataUser($user_id);
     echo json_encode($result);
-
-
 }
