@@ -3,6 +3,7 @@
 //require_once ("../../controllers/login_controller.php");
 //
 //?>
+<section class="main">
 
     <div>
         <label for="email">Email</label>
@@ -17,5 +18,6 @@
     </div>
     <div id="invalid" style="visibility: hidden"></div>
 <a href="index.php?page=registration">Register</a>
+</section>
 
 

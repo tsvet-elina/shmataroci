@@ -2,7 +2,7 @@
 
 ?>
 
-<section>
+<section class="main">
     <div>
 
         <a href="index.php?page=sea">More</a>

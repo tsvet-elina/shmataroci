@@ -6,24 +6,28 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="assets/javascripts/application.js"></script>
+    <link href="assets/stylesheets/application.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-<nav>
+<header class="header">
+    <nav class="nav">
 
-    <a href="index.php?page=about">Нашата мисия</a>
-    <a href="index.php?page=places">Забележителности</a>
-    <a href="index.php?page=add">Добави</a>
-    <a href="index.php?page=edit">Редактирай профил</a>
-    <?php
-    if (isset($_SESSION["user"])) {
+        <a href="index.php?page=about">Нашата мисия</a>
+        <a href="index.php?page=places">Забележителности</a>
+        <a href="index.php?page=add">Добави</a>
+        <a href="index.php?page=edit">Редактирай профил</a>
+        <?php
+        if (isset($_SESSION["user"])) {
+            ?>
+            <a href="index.php?page=logout">Изход</a>
+        <?php } else {
+            ?>
+            <a href="index.php?page=login">Вход</a>
+        <?php }
         ?>
-        <a href="index.php?page=logout">Изход</a>
-    <?php } else {
-        ?>
-        <a href="index.php?page=login">Вход</a>
-    <?php }
-    ?>
 
 
-</nav>
+    </nav>
+</header>
+

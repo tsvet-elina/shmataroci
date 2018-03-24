@@ -1,6 +1,9 @@
-<h1><?php if(isset($infoReg)){
-    echo $infoReg;
-    } ?></h1>
+<!--<h1>--><?php //if(isset($infoReg)){
+//    echo $infoReg;
+//    } ?><!--</h1>-->
+
+<section class="main">
+
 <form method="post" action="controllers/registration_controller.php" enctype="multipart/form-data">
     <div>
         <label for="user">Потребителско име</label>
@@ -24,9 +27,9 @@
     </div>
     <div>
         <label>Пол</label>
-        <input type="radio" name="gender" value="Male">
-        <input type="radio" name="gender" value="Female">
-        <input type="radio" name="gender" value="Other">
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+        <input type="radio" name="gender" value="Other">Other
     </div>
     <div>
         <label for="image">Снимка</label>
@@ -36,3 +39,4 @@
         <input type="submit" name="register" value="Register">
     </div>
 </form>
+</section>

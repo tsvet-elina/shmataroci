@@ -3,12 +3,12 @@ session_start();
 //var_dump($_SESSION["user"]);
 if (isset($_POST["edit"])) {
     require_once "../models/user.php";
-    $username = htmlentities($_POST["user"]);
-    $password = htmlentities($_POST["pass"]);
-    $repPassword = htmlentities($_POST["repPass"]);
-    $age = htmlentities($_POST["age"]);
-    $gender = htmlentities($_POST["gender"]);
-    $email = htmlentities($_POST["email"]);
+    $username = htmlentities($_POST["userEdit"]);
+    $password = htmlentities($_POST["passEdit"]);
+    $repPassword = htmlentities($_POST["repPassEdit"]);
+    $age = htmlentities($_POST["ageEdit"]);
+    $gender = htmlentities($_POST["genderEdit"]);
+    $email = htmlentities($_POST["emailEdit"]);
     $image = htmlentities($_FILES["image"]["tmp_name"]);
 
     $result = editUserData($username, $password, $email, $gender, $age, $image, $_SESSION["user"]["user_id"]);

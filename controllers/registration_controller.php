@@ -10,31 +10,34 @@ if (isset($_POST["register"])) {
     $gender = htmlentities($_POST["gender"]);
     $email = htmlentities($_POST["email"]);
     $image = htmlentities($_FILES["image"]["tmp_name"]);
+
     if (is_uploaded_file($image)) {
-        $url = "./assets/img/$username.jpg";
+        $url = "assets/images/$username.jpg";
         if (move_uploaded_file($image, $url)) {
+
         }
+    }else{
+        $error["image"]="Проблеми с качването на изображението";
     }
+
 
     $error = [];
     if (empty($username)) {
-        $error["username"] = "";
+        $error["username"] = "Въведете потребителско име";
     }
     if (empty($password)) {
-        $error["password"] = "";
+        $error["password"] = "Въведете парола";
     }
-    if ($password!=$repPassword){
-        $error["diffPasswords"]="";
+    if ($password != $repPassword) {
+        $error["diffPasswords"] = "Потвърдете паролата";
     }
 
     if (empty($age)) {
-        $error["gender"] = "";
+        $error["gender"] = "Въведете години ";
     }
-    if (empty($email)){
-        $error["email"]="";
+    if (empty($email)) {
+        $error["email"] = "Въведете поща ";
     }
-
-
 
 
     if (!empty($username) && !empty($password) && !empty($repPassword) && !empty($age) && !empty($gender)

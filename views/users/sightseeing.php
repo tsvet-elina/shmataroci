@@ -1,5 +1,7 @@
-<div id="sec"></div>
-
+<div id="sec" class="main"></div>
+<?php
+var_dump($_SESSION["user"]);
+?>
 <script>
     var request = new XMLHttpRequest();
     request.open("get", "controllers/places_controller.php?category=3");

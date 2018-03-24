@@ -1,6 +1,6 @@
 
 
-<p id="info"></p>
+<p id="info" class="main"></p>
 
 <script>
     var request=new XMLHttpRequest();

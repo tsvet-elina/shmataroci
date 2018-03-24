@@ -1,40 +1,41 @@
-<section>
+<section class="main">
     <form method="post" action="controllers/edit_controller.php" enctype="multipart/form-data">
         <div>
             <label for="user">Потребителско име</label>
-            <input type="text" name="user" id="user" value="">
+            <input type="text" name="userEdit" id="user" value="">
         </div>
         <div>
             <label for="email">Поща</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="emailEdit" id="email">
         </div>
         <div>
             <label for="pass">Парола</label>
-            <input type="password" name="pass" id="pass">
+            <input type="password" name="passEdit" id="pass">
         </div>
         <div>
             <label for="repPass">Потвърди паролата</label>
-            <input type="password" name="repPass" id="repPass">
+            <input type="password" name="repPassEdit" id="repPass">
         </div>
         <div>
             <label for="age">Години</label>
-            <input type="number" name="age" id="age">
+            <input type="number" name="ageEdit" id="age">
         </div>
         <div>
             <label>Пол</label>
-            <input type="radio" name="gender" value="Male">
-            <input type="radio" name="gender" value="Female">
-            <input type="radio" name="gender" value="Other">
+            <input type="radio" name="genderEdit" value="Male">
+            <input type="radio" name="genderEdit" value="Female">
+            <input type="radio" name="genderEdit" value="Other">
         </div>
         <div>
             <label for="image">Снимка</label>
-            <input type="file" id="image" name="image">
+            <input type="file" id="imageEdit" name="image">
         </div>
         <div>
             <input type="submit" name="edit" value="Edit">
         </div>
     </form>
 </section>
+
 <script>
 
     var request = new XMLHttpRequest();

@@ -1,15 +1,6 @@
 <?php
 session_start();
 
-//define("BASE_PATH", dirname(__FILE__) . DIRECTORY_SEPARATOR);
-//define("BASE_URL", 'http://localhost/shmataroci');
-//if (isset($_GET["page"])) {
-//    $page = $_GET["page"];
-//} else {
-//    $page = "index";
-//}
-////echo $page;
-//include_once "controllers" . DIRECTORY_SEPARATOR . $page . "_controller.php";
 require_once("views/layouts/header.php");
 
 
@@ -17,7 +8,7 @@ if (isset($_GET["page"])) {
     $page = $_GET["page"];
 
 } else {
-    $page = "index";
+    $page = "main";
 }
 if ($page == "logout") {
     session_destroy();
@@ -25,10 +16,6 @@ if ($page == "logout") {
 }
 
 
-//require_once ("models/db_model.php");
-//	require_once(BASE_PATH . 'views' . DIRECTORY_SEPARATOR . $viewFile);
-
-//require_once("controllers/".$page."_controller.php");
 require_once("views/users/" . $page . ".php");
 require_once("views/layouts/footer.php");
 

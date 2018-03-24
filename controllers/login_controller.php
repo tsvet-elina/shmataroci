@@ -3,7 +3,7 @@
 //
 //include_once BASE_PATH . "views" . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . 'application.php';
 
-
+session_start();
 if (isset($_POST["email"])) {
     require_once "../models/user.php";
     $email = htmlentities($_POST["email"]);
@@ -12,7 +12,6 @@ if (isset($_POST["email"])) {
     $currentUser = login($email, $password);
 
     if ($currentUser != null) {
-        session_start();
         $_SESSION["user"] = $currentUser;
     } else {
         $error = array();

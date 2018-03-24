@@ -1,4 +1,4 @@
-<div id="div"></div>
+<div id="div" class="main"></div>
 
 <script>
     var request=new XMLHttpRequest();
