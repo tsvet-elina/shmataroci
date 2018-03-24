@@ -66,7 +66,11 @@ function getPlaceInfo($category)
 {
     $result = [];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT place_name,description,place_added_by,place_like,place_dislike,id FROM places WHERE category=?");
+    $statement=$pdo->prepare("SELECT place_name,description,u.username,place_like,place_dislike,p.id FROM places as p
+JOIN users as u
+ON (p.place_added_by=u.id)
+WHERE category=? AND checked_by_admin=1
+");
     $statement->execute(array($category));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;

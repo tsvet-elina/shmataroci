@@ -72,7 +72,22 @@
                             request_comment.send();
 
                         }
-                    }else{
+                    }else if(each === "username"){
+                        var p = document.createElement("p");
+                        p.innerHTML = "Added by:" + " : " + response[item][each];
+                        div.appendChild(p);
+                    }else if(each === "place_like"){
+                        var p = document.createElement("p");
+                        p.innerHTML = "Like" + " : " + response[item][each];
+                        p.id="like"+response[item]["id"];
+                        div.appendChild(p);
+                    }else if(each === "place_dislike"){
+                        var p = document.createElement("p");
+                        p.innerHTML = "Dislike" + " : " + response[item][each];
+                        p.id="dislike"+response[item]["id"];
+                        div.appendChild(p);
+                    }
+                    else{
                         console.log(response[item][each]);
                         var p = document.createElement("p");
                         p.innerHTML = each + " : " + response[item][each];
