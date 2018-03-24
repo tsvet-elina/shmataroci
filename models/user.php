@@ -66,7 +66,7 @@ function getPlaceInfo($category)
 {
     $result = [];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT id,place_name,description,place_added_by,place_like,place_dislike FROM places WHERE category=?");
+    $statement=$pdo->prepare("SELECT place_name,description,place_added_by,place_like,place_dislike,id FROM places WHERE category=?");
     $statement->execute(array($category));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
@@ -77,11 +77,31 @@ function getPlaceInfo($category)
 
 function insertComment($id,$comment,$user_id){
     include_once("db_model.php");
+
     $statement=$pdo->prepare("INSERT INTO comments(user_id,place_id,comment_place) VALUES (?, ?, ?)");
-    $statement->execute(array($user_id,$id,$comment));
-    if($statement->fetch()>0){
+    $statement->execute(array(intval($user_id),intval($id),$comment));
+
+
         return true;
-    }else{
-        return false;
+
+}
+
+function showComment($comment_id){
+    include_once("db_model.php");
+    $result = [];
+    $statement=$pdo->prepare("SELECT p.place_name, u.username, c.comment_place
+FROM comments as c
+JOIN users as u
+ON (c.user_id=u.id)
+JOIN places as p
+ON (c.place_id=p.id)
+WHERE c.place_id=?");
+    $statement->execute(array($comment_id));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+
     }
+    return $result;
+
+
 }
