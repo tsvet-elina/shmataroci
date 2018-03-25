@@ -1,0 +1,86 @@
+<div id="div1" class="col-sm-8">
+            <div class="panel-heading">
+           
+
+<div class="content-box-large">
+  				<div class="panel-body">
+
+
+  					<div class="row">
+
+  						<div class="col-md-3">
+						
+							<p>AGE</p>
+  							<div id="hero-donut" style="height: 230px;"></div>
+  						</div>
+						<div class="col-md-3"></div>
+  						<div class="col-md-3">
+							<p>GENDER</p>
+  							<div id="hero-donut2" style="height: 230px;"></div>
+  						</div>
+  					</div>
+  				</div>
+</div>
+ </div>
+        </div> 
+
+
+
+
+
+<script>
+
+
+
+   
+
+    Morris.Donut({
+        element: 'hero-donut',
+        data: [
+            {label: '0-18', value: 25 },
+            {label: '18-25', value: 50 },
+            {label: '25-40', value: 15 },
+            {label: '40+', value: 10 }
+        ],
+        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+        formatter: function (y) { return y + "%" }
+    });
+
+    // Morris Donut Chart
+    Morris.Donut({
+        element: 'hero-donut2',
+        data: [
+            {label: 'Male', value: 25 },
+            {label: 'Female', value: 75 },
+
+        ],
+        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+        formatter: function (y) { return y + "%" }
+    });
+
+
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="vendors/morris/morris.css">
+
+
+    <script src="vendors/jquery.knob.js"></script>
+    <script src="vendors/raphael-min.js"></script>
+    <script src="vendors/morris/morris.min.js"></script>
+
+    <script src="vendors/flot/jquery.flot.js"></script>
+    <script src="vendors/flot/jquery.flot.categories.js"></script>
+    <script src="vendors/flot/jquery.flot.pie.js"></script>
+    <script src="vendors/flot/jquery.flot.time.js"></script>
+    <script src="vendors/flot/jquery.flot.stack.js"></script>
+    <script src="vendors/flot/jquery.flot.resize.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script src="js/stats.js"></script>

@@ -1,0 +1,99 @@
+
+
+
+  			<div class="col-sm-8" id="tables">
+  				<div class="panel-heading">
+					<div class="panel-title">USERS</div>
+				</div>
+  				<div class="panel-body" id="my">
+
+				</div>
+			</div>
+
+
+			<script>
+
+
+				var request = new XMLHttpRequest();
+        request.open("get", "../../controllers/admin_controller.php?info=users");
+        var mainVar = "";
+        request.onreadystatechange = function () {
+            if (!(request.status === 200 && request.readyState === 4)) {
+            } else {
+                var example = JSON.parse(this.responseText);
+                console.log(example);
+
+                var str = "<table  cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"table table-striped table-bordered\"  id=\"da\">";
+                str += "<tr><th>user_id</th>";
+                str += "<th>username</th>";
+                str += "<th>email</th>";
+                str += "<th>gender</th>";
+                str += "<th>age</th>";
+                str += "<th>del</th></tr>";
+
+                for (var j = 0; j < example.length; j++) {
+
+                   str += "<tr id=\""+j+"\">";
+
+
+                    for (var item in example[j]) {
+
+
+                        str += "<td>";
+                        str += example[j][item];
+                        str += "</td>";
+
+                        if(item == "user_id"){
+                            mainVar = example[j][item];
+                        }
+
+
+                    }
+                    
+                    str += "<td><button class=\"btn btn-danger btn-sm\" onclick=\"myDeleteFunction("+ j +"); postUser("+ mainVar +");\">Delete</button></td>";
+                    str += "</tr>";
+                    console.log(mainVar);
+
+                }
+                str += "</table>";
+               document.getElementById("my").innerHTML = str;
+               console.log(str);
+               
+
+            }
+        }
+
+        request.send();
+
+        function myDeleteFunction(j) {
+    
+            alert(j);
+            var row = document.getElementById(j);
+            row.parentNode.removeChild(row);
+        }
+
+        function postUser(mainVar) {
+            var r = new XMLHttpRequest();
+            var id = mainVar;
+            r.open("post", "../../controllers/admin_controller.php" );
+            r.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            r.onreadystatechange = function (ev) {
+                if (!(r.status === 200 && r.readyState === 4)) {
+                }else{
+
+                    console.log(this.responseText);
+                }
+            }
+            console.log(id);
+            r.send("user_id="+id);
+
+        }
+
+        
+
+
+			</script>
+
+
+
+
