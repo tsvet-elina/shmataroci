@@ -42,12 +42,12 @@ function addUserToDB($username, $password, $email, $gender, $age, $image)
 
 //EDIT
 
-function editUserData($username, $password, $email, $gender, $age, $image, $id)
+function editUserData($username, $password, $email, $gender, $age, $url, $id)
 {
     include_once("db_model.php");
     $update = $pdo->prepare("UPDATE users  SET username = ?, password =?,email =?,
-gender=?,age=?,image=? , is_admin =? WHERE user_id = ?");
-    $update->execute([$username, $password, $email, $gender, $age, $image,0, $id]);
+gender=?,age=?,image=? , is_admin =? WHERE id = ?");
+    $update->execute([$username, $password, $email, $gender, $age, $url,0, $id]);
     //$affectedRow = $update->fetch();
     // return $affectedRow;
 
@@ -56,7 +56,7 @@ gender=?,age=?,image=? , is_admin =? WHERE user_id = ?");
 function getDataUser($id)
 {
     include_once("db_model.php");
-    $statement = $pdo->prepare("SELECT * from users WHERE user_id=?");
+    $statement = $pdo->prepare("SELECT * from users WHERE id=?");
     $statement->execute([$id]);
     $info = $statement->fetch(PDO::FETCH_ASSOC);
     return $info;

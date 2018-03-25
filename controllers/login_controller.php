@@ -15,7 +15,7 @@ if (isset($_POST["email"])) {
         $_SESSION["user"] = $currentUser;
     } else {
         $error = array();
-        $error["msg"] = "Invalid credentials";
+        $error["msg"] = "Попълнете всички полета";
         echo  json_encode($error);
     }
 
