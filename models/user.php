@@ -109,3 +109,11 @@ WHERE c.place_id=?");
 
 
 }
+
+function addPlace($name,$desc,$user_id,$category,$url){
+    include_once("db_model.php");
+    $statement=$pdo->prepare("INSERT INTO places(place_name,description,place_like,place_dislike,place_added_by,add_date,category,checked_by_admin,image) VALUES
+(?,?,?,?,?,?,?,?,?)");
+    $statement->execute(array($name,$desc,0,0,intval($user_id),intval(date("m.d.y")),intval($category),0,$url));
+    return 1;
+}
