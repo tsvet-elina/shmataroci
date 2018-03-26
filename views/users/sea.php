@@ -152,6 +152,12 @@
                         div.appendChild(button_like);
 
 
+                    }else if(each==="image"){
+                        console.log("img e tuk");
+                        // var image="<img src="+response[item]["image"]+">";
+                        var image=document.createElement("IMG");
+                        image.setAttribute("src", response[item][each]);
+                        div.appendChild(image);
                     }
                     else {
                         console.log(response[item][each]);

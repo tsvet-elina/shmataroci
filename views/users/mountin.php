@@ -1,6 +1,10 @@
 <div id="sec" class="main"></div>
 
+
 <script>
+
+    var cat=2;
+    //---------------********************---------------*************----------****************-------------
     var request = new XMLHttpRequest();
     request.open("get", "controllers/places_controller.php?category=2");
     request.onreadystatechange = function () {
@@ -12,8 +16,6 @@
                 var div = document.createElement("div");
                 var div2 = document.createElement("div");
                 for (var each in response[item]) {
-
-
 
 
                     if (each === "id") {
@@ -71,7 +73,93 @@
                             request_comment.send();
 
                         }
-                    }else{
+                    } else if (each === "username") {
+                        var p = document.createElement("p");
+                        p.innerHTML = "Added by:" + " : " + response[item][each];
+                        div.appendChild(p);
+                    } else if (each === "place_like") {
+
+                        var button_like = document.createElement("button");
+                        button_like.innerHTML = "like  " + response[item][each];
+                        button_like.id = "like" + response[item]["id"];
+                        button_like.value = response[item]["id"];
+                        var val = button_like.value;
+                        console.log("val" + val);
+                        //---------------------------------
+                        var check_if_liked = new XMLHttpRequest();
+                        check_if_liked.open("get", "controllers/places_controller.php?place_id=give&cat="+cat);
+                        check_if_liked.onreadystatechange = function () {
+                            if (check_if_liked.readyState === 4 && check_if_liked.status === 200) {
+                                var checked_if_liked = JSON.parse(this.responseText);
+                                for (var like in checked_if_liked) {
+                                    console.log(checked_if_liked[like]["place_id"]);//   PROWERKA!
+                                    document.getElementById("like"+checked_if_liked[like]["place_id"]).style.backgroundColor="green";
+                                }
+                            }
+                        }
+                        check_if_liked.send();
+
+                        //----------------------------------
+                        button_like.onclick = function () {
+                            alert(this.value);
+                            var clicked_l = this.value;
+                            var request_like = new XMLHttpRequest();
+                            request_like.open("get", "controllers/places_controller.php?like=" + clicked_l);
+                            request_like.onreadystatechange = function () {
+
+                                var response_like = request_like.responseText;
+                                if (response_like === "like") {
+
+                                    document.getElementById("like" + clicked_l).style.color = "white";
+                                    document.getElementById("like" + clicked_l).style.backgroundColor = "green";
+                                    //*******-------------**************--------------*************-----------******----***--*-*-*
+                                    var getLikes = new XMLHttpRequest();
+                                    getLikes.open("get","controllers/places_controller.php?numberLikes="+clicked_l);
+                                    getLikes.onreadystatechange=function(){
+                                        if(getLikes.readyState===4 && getLikes.status===200){
+                                            var like_num=JSON.parse(this.responseText);
+                                            console.log(like_num["place_like"]);
+                                            document.getElementById("like"+clicked_l).innerHTML="Like"+like_num["place_like"];
+
+                                        }
+                                    }
+                                    getLikes.send();
+
+
+
+
+                                    //*******-------------**************--------------*************-----------******----***--*-*-*
+                                } else {
+
+                                    document.getElementById("like" + clicked_l).style.color = "black";
+                                    document.getElementById("like" + clicked_l).style.backgroundColor = "white";
+                                    //*
+                                    var getLikes = new XMLHttpRequest();
+                                    getLikes.open("get","controllers/places_controller.php?numberLikes="+clicked_l);
+                                    getLikes.onreadystatechange=function(){
+                                        if(getLikes.readyState===4 && getLikes.status===200){
+                                            var like_num=JSON.parse(this.responseText);
+                                            console.log(like_num["place_like"]);
+                                            document.getElementById("like"+clicked_l).innerHTML="Like"+like_num["place_like"];
+
+                                        }
+                                    }
+                                    getLikes.send();
+                                }
+                            }
+                            request_like.send();
+                        }
+                        div.appendChild(button_like);
+
+
+                    }else if(each==="image"){
+                        console.log("img e tuk");
+                        // var image="<img src="+response[item]["image"]+">";
+                        var image=document.createElement("IMG");
+                        image.setAttribute("src", response[item][each]);
+                        div.appendChild(image);
+                    }
+                    else {
                         console.log(response[item][each]);
                         var p = document.createElement("p");
                         p.innerHTML = each + " : " + response[item][each];
@@ -95,4 +183,6 @@
         }
     }
     request.send();
+
+
 </script>
