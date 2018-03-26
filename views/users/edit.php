@@ -2,11 +2,11 @@
     <form method="post" action="controllers/edit_controller.php" enctype="multipart/form-data">
         <div>
             <label for="user">Потребителско име</label>
-            <input type="text" name="userEdit" id="user" value="">
+            <input type="text" name="userEdit" id="user" >
         </div>
         <div>
             <label for="email">Поща</label>
-            <input type="email" name="emailEdit" id="email">
+            <input type="email" name="emailEdit" id="email"  >
         </div>
         <div>
             <label for="pass">Парола</label>
@@ -46,10 +46,8 @@
             console.log(response["username"]);
             document.getElementById("user").value=response["username"];
             document.getElementById("email").value=response["email"];
-            document.getElementById("pass").value=response["pass"];
-            document.getElementById("repPass").value=response["repPass"];
             document.getElementById("age").value=response["age"];
-            document.getElementById("image").value=response["image"];
+           // document.getElementById("image").value=response["image"];
            //? document.getElementById("image").value=response["image"];//gender
             //da opravim sesiqta.
 

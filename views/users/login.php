@@ -14,7 +14,7 @@
         <input type="password" name="password" id="password">
     </div>
     <div>
-        <button onclick="doLogin()">Login</button>
+        <button onclick="doLogin()" name="login">Login</button>
     </div>
     <div id="invalid" style="visibility: hidden"></div>
 <a href="index.php?page=registration">Register</a>

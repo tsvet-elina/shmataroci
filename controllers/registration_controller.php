@@ -11,17 +11,16 @@ if (isset($_POST["register"])) {
     $email = htmlentities($_POST["email"]);
     $image = htmlentities($_FILES["image"]["tmp_name"]);
 
+    $error = [];
+
     if (is_uploaded_file($image)) {
-        $url = "assets/images/$username.jpg";
+        $url = "../assets/images/$username.jpg";
         if (move_uploaded_file($image, $url)) {
 
         }
-    }else{
-        $error["image"]="Проблеми с качването на изображението";
+    } else {
+        $error["image"] = "Проблеми с качването на изображението";
     }
-
-
-    $error = [];
     if (empty($username)) {
         $error["username"] = "Въведете потребителско име";
     }
@@ -31,7 +30,6 @@ if (isset($_POST["register"])) {
     if ($password != $repPassword) {
         $error["diffPasswords"] = "Потвърдете паролата";
     }
-
     if (empty($age)) {
         $error["gender"] = "Въведете години ";
     }
@@ -39,11 +37,9 @@ if (isset($_POST["register"])) {
         $error["email"] = "Въведете поща ";
     }
 
+    if (empty($error)) {
 
-    if (!empty($username) && !empty($password) && !empty($repPassword) && !empty($age) && !empty($gender)
-        && !empty($email) && !empty($image)) {
-
-        $result = addUserToDB($username, $password, $email, $gender, $age, $image);
+        $result = addUserToDB($username, $password, $email, $gender, $age, $url);
 
         if ($result) {
             $infoReg = "Successful registration";
@@ -55,6 +51,5 @@ if (isset($_POST["register"])) {
         }
 
     }
-
 
 }
