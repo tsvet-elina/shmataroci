@@ -24,6 +24,7 @@
     <div>
         <label for="age">Години</label>
         <input type="number" name="age" id="age">
+        <div id="ageError" style="visibility: hidden;"><div>
     </div>
     <div>
         <label>Пол</label>

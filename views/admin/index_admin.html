@@ -15,7 +15,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body onload="loadPlaces()">
+<body>
 <div class="header">
     <div class="container">
         <div class="row">
@@ -48,13 +48,14 @@
             <div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
 
-                    <li><a href=""><i class="glyphicon glyphicon-home"></i>Places</a></li>
+                    <li><a href=""><i class="glyphicon glyphicon-home"></i>Comments</a></li>
                     <!--<li><a href="calendar.html"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>-->
                     <li><a id="stat"><i class="glyphicon glyphicon-stats"></i> Statistics</a></li>
                     <li><a id="table"><i class="glyphicon glyphicon-list"></i> Users</a></li>
 
                     <li><a id="check"><i class="glyphicon glyphicon-pencil"></i> Check Place</a></li>
                     <li><a id="forms"><i class="glyphicon glyphicon-tasks"></i> Add Place</a></li>
+                    <li><a onclick = "logOut();"><i></i> LOG OUT</a></li>
                     <!-- <li class="submenu">
                         <a href="#">
                             <i class="glyphicon glyphicon-list"></i> Pages
@@ -78,7 +79,7 @@
 
             <div class="col-sm-8" id="main">
                 <div class="panel-heading">
-                    <div class="panel-title">PLACES AND COMMENTS</div>
+                    <div class="panel-title">COMMENTS</div>
                 </div>
                 <div class="panel-body" id="my">
 
@@ -144,61 +145,94 @@
         $( "#main" ).hide();
     });
 
-        function loadPlaces(){
-                var request = new XMLHttpRequest();
-                    request.open("get", "test_data.php?try=try");
+    var request = new XMLHttpRequest();
+    request.open("get", "../../controllers/admin_controller.php?info=comments");
+    var mainVar = "";
+    request.onreadystatechange = function () {
+        if (!(request.status === 200 && request.readyState === 4)) {
+        } else {
+            var example = JSON.parse(this.responseText);
+            console.log(example);
 
-                    request.onreadystatechange = function () {
-                        if (!(request.status === 200 && request.readyState === 4)) {
-                        } else {
-                            var example = JSON.parse(this.responseText);
-                            console.log(example);
+            var str = "<table  cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"table table-striped table-bordered\"  id=\"da\">";
+            str += "<tr><th>comment_id</th>";
+            str += "<th>added_by</th>";
+            str += "<th>place</th>";
+            str += "<th>comment</th>";
+            str += "<th>del</th></tr>";
 
-                            var str = "<table  cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"table table-striped table-bordered\" >";
-                            str += "<tr><th>place_id</th>";
-                            str += "<th>name</th>";
-                            str += "<th>description</th>";
-                            str += "<th>img</th>";
-                            str += "<th>---</th>";
-                            str += "<th>del</th></tr>";
+            for (var j = 0; j < example.length; j++) {
 
-                            for (var j = 0; j < example.length; j++) {
-
-                                str += "<tr>";
+                str += "<tr id=\""+j+"\">";
 
 
-                                for (var item in example[j]) {
+                for (var item in example[j]) {
 
 
-                                    str += "<td>";
-                                    str += example[j][item];
-                                    str += "</td>";
-                                    if(item == "user_id"){
-                                        var id = example[j][item];
-                                    }
+                    str += "<td>";
+                    str += example[j][item];
+                    str += "</td>";
 
-
-                                }
-                                str += "<td><button class=\"btn btn-danger btn-sm\" onclick=\"myDeleteFunction("+ j+ ")\">Delete</button></td>";
-                                str += "</tr>";
-
-                            }
-                            str += "</table>";
-                            document.getElementById("my").innerHTML = str;
-                            console.log(str);
-
-                        }
+                    if(item == "id"){
+                        mainVar = example[j][item];
                     }
 
-                    request.send();
+
                 }
 
-                function myDeleteFunction(j) {
-    
-                    alert(j);
-                    var row = document.getElementById(j);
-                    row.parentNode.removeChild(row);
-                }
+                str += "<td><button class=\"btn btn-danger btn-sm\" onclick=\"myDeleteFunction("+ j +"); deleteCom("+ mainVar +");\">Delete</button></td>";
+                str += "</tr>";
+                console.log(mainVar);
+
+            }
+            str += "</table>";
+            document.getElementById("my").innerHTML = str;
+            console.log(str);
+
+
+        }
+    }
+
+    request.send();
+
+    function myDeleteFunction(j) {
+
+        alert(j);
+        var row = document.getElementById(j);
+        row.parentNode.removeChild(row);
+    }
+
+    function deleteCom(mainVar) {
+        var r = new XMLHttpRequest();
+        var id = mainVar;
+        r.open("post", "../../controllers/admin_controller.php" );
+        r.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        r.onreadystatechange = function (ev) {
+            if (!(r.status === 200 && r.readyState === 4)) {
+            }else{
+
+                console.log(this.responseText);
+            }
+        }
+        console.log(id);
+        r.send("comment_id="+id);
+
+    }
+
+    function logOut() {
+        var r = new XMLHttpRequest();
+        r.open("get", "../../controllers/admin_controller.php?info=logout");
+        r.onreadystatechange = function (ev) {
+            if (!(r.status === 200 && r.readyState === 4)) {
+            }else{
+                var newLocation = "../../index.php";
+                window.location = newLocation;
+            }
+        }
+        r.send();
+
+    }
+
 
 
 

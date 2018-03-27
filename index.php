@@ -12,21 +12,26 @@ if (isset($_GET["page"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    if ($page === "sea") {
-        require_once("views/users/sea.php");
-    } elseif ($page === "sightseeing") {
-        require_once("views/users/sightseeing.php");
-    } elseif ($page === "mountin") {
-        require_once("views/users/mountin.php");
-    }elseif ($page==="edit"){
-        require_once("views/users/edit.php");
-    } elseif ($page == "logout") {
-        session_destroy();
-        header("location:index.php?page=places");
-    }elseif ($page==="add"){
-        require_once("views/users/add.php");
-    }if ($page==="places"){
-        require_once("views/users/places.php");
+    if($_SESSION["user"]["is_admin"] != NULL){
+        header("Location: views/admin/index_admin.html");
+    }else {
+        if ($page === "sea") {
+            require_once("views/users/sea.php");
+        } elseif ($page === "sightseeing") {
+            require_once("views/users/sightseeing.php");
+        } elseif ($page === "mountin") {
+            require_once("views/users/mountin.php");
+        } elseif ($page === "edit") {
+            require_once("views/users/edit.php");
+        } elseif ($page == "logout") {
+            session_destroy();
+            header("location:index.php?page=places");
+        } elseif ($page === "add") {
+            require_once("views/users/add.php");
+        }
+        if ($page === "places") {
+            require_once("views/users/places.php");
+        }
     }
 } else {
     if ($page === "login") {
