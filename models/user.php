@@ -66,7 +66,7 @@ function getPlaceInfo($category)
 {
     $result = [];
     include_once("db_model.php");
-    $statement=$pdo->prepare("SELECT place_name,description,u.username,place_like,place_dislike,p.id FROM places as p
+    $statement=$pdo->prepare("SELECT place_name,p.image,description,u.username,place_like,p.id FROM places as p
 JOIN users as u
 ON (p.place_added_by=u.id)
 WHERE category=? AND checked_by_admin=1
@@ -112,8 +112,50 @@ WHERE c.place_id=?");
 
 function addPlace($name,$desc,$user_id,$category,$url){
     include_once("db_model.php");
-    $statement=$pdo->prepare("INSERT INTO places(place_name,description,place_like,place_dislike,place_added_by,add_date,category,checked_by_admin,image) VALUES
-(?,?,?,?,?,?,?,?,?)");
-    $statement->execute(array($name,$desc,0,0,intval($user_id),intval(date("m.d.y")),intval($category),0,$url));
+    $statement=$pdo->prepare("INSERT INTO places(place_name,description,place_like,place_added_by,add_date,category,checked_by_admin,image) VALUES
+(?,?,?,?,?,?,?,?)");
+    $statement->execute(array($name,$desc,0,intval($user_id),intval(date("m.d.y")),intval($category),0,$url));
     return 1;
+}
+
+function like($id,$user_id){
+    include_once("db_model.php");
+    $statement=$pdo->prepare("SELECT COUNT(*) as broi FROM likes WHERE user_id=? AND place_id=?");
+    $statement->execute(array($user_id,$id));
+    $row=$statement->fetch();
+    if($row["broi"]>0){
+        $insert=$pdo->prepare("DELETE FROM likes WHERE place_id=?");
+        $insert->execute(array($id));
+        $update=$pdo->prepare("UPDATE places SET place_like=place_like-1 WHERE id=?");
+        $update->execute(array($id));
+        return false;
+    }else{
+        $insert=$pdo->prepare("INSERT INTO likes(user_id,place_id,like_place)VALUES (?,?,?)");
+        $insert->execute(array($user_id,$id,1));
+        $update=$pdo->prepare("UPDATE places SET place_like=place_like+1 WHERE id=?");
+        $update->execute(array($id));
+        return true;
+
+
+    }
+}
+
+function checkIfLiked($user_id,$category){
+    include_once("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT l.place_id FROM likes as l JOIN places as p ON (l.place_id=p.id) WHERE p.category=? AND l.user_id=?");
+    $statement->execute(array(intval($category),intval($user_id)));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+    return $result;
+
+}
+
+function getNumberOfLikes($place_id){
+    include_once("db_model.php");
+    $statement=$pdo->prepare("SELECT place_like FROM places WHERE id=?");
+    $statement->execute(array(intval($place_id)));
+    $row=$statement->fetch(PDO::FETCH_ASSOC);
+    return $row;
 }

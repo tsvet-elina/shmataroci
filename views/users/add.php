@@ -17,10 +17,11 @@ var_dump($_SESSION["user"]);
 
 <script>
     function formValidation() {
-        if(document.forms["form"]["name"].value==="" || document.form["form"]["desc"].value==="" || document.form["form"]["pic"].value==="" || document.form["form"]["category"].value==="" ){
+        if(document.forms["form"]["name"].value==="" || document.forms["form"]["desc"].value==="" || document.forms["form"]["pic"].value==="" || document.forms["form"]["category"].value==="" ){
             document.getElementById("errorHolder").style.visibility="visible";
             document.getElementById("errorHolder").innerHTML="Попълни всички полета!";
             return false;
+
         }
     }
 </script>
