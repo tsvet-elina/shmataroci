@@ -12,6 +12,7 @@ if (isset($_GET["page"])) {
 }
 
 if (isset($_SESSION["user"])) {
+
     if($_SESSION["user"]["is_admin"] != NULL){
         header("Location: views/admin/index_admin.html");
     }else {
@@ -32,6 +33,7 @@ if (isset($_SESSION["user"])) {
         if ($page === "places") {
             require_once("views/users/places.php");
         }
+
     }
 } else {
     if ($page === "login") {
@@ -45,8 +47,8 @@ if (isset($_SESSION["user"])) {
 
 
 //require_once("views/users/" . $page . ".php");
-require_once("views/layouts/footer.php");
+//require_once("views/layouts/footer.php");
 
-echo "Pyrva proba";
-echo "vtora proba";
-echo "Neko Treci";
+//echo "Pyrva proba";
+//echo "vtora proba";
+//echo "Neko Treci";

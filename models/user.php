@@ -67,10 +67,10 @@ function getPlaceInfo($category)
     $result = [];
     include_once("db_model.php");
     $statement=$pdo->prepare("SELECT place_name,p.image,description,u.username,place_like,p.id FROM places as p
-JOIN users as u
-ON (p.place_added_by=u.id)
-WHERE category=? AND checked_by_admin=1
-");
+                                JOIN users as u
+                                ON (p.place_added_by=u.id)
+                                WHERE category=? AND checked_by_admin=1
+                                ");
     $statement->execute(array($category));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
@@ -94,12 +94,12 @@ function showComment($comment_id){
     include_once("db_model.php");
     $result = [];
     $statement=$pdo->prepare("SELECT p.place_name, u.username, c.comment_place
-FROM comments as c
-JOIN users as u
-ON (c.user_id=u.id)
-JOIN places as p
-ON (c.place_id=p.id)
-WHERE c.place_id=?");
+                                FROM comments as c
+                                JOIN users as u
+                                ON (c.user_id=u.id)
+                                JOIN places as p
+                                ON (c.place_id=p.id)
+                                WHERE c.place_id=?");
     $statement->execute(array($comment_id));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
@@ -113,8 +113,8 @@ WHERE c.place_id=?");
 function addPlace($name,$desc,$user_id,$category,$url){
     include_once("db_model.php");
     $statement=$pdo->prepare("INSERT INTO places(place_name,description,place_like,place_added_by,add_date,category,checked_by_admin,image) VALUES
-(?,?,?,?,?,?,?,?)");
-    $statement->execute(array($name,$desc,0,intval($user_id),intval(date("m.d.y")),intval($category),0,$url));
+(?,?,?,?,now(),?,?,?)");
+    $statement->execute(array($name,$desc,0,intval($user_id),intval($category),0,$url));
     return 1;
 }
 
@@ -143,7 +143,8 @@ function like($id,$user_id){
 function checkIfLiked($user_id,$category){
     include_once("db_model.php");
     $result=[];
-    $statement=$pdo->prepare("SELECT l.place_id FROM likes as l JOIN places as p ON (l.place_id=p.id) WHERE p.category=? AND l.user_id=?");
+    $statement=$pdo->prepare("SELECT l.place_id FROM likes as l JOIN places as p ON (l.place_id=p.id) WHERE p.category=?
+                              AND l.user_id=?");
     $statement->execute(array(intval($category),intval($user_id)));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
@@ -158,4 +159,59 @@ function getNumberOfLikes($place_id){
     $statement->execute(array(intval($place_id)));
     $row=$statement->fetch(PDO::FETCH_ASSOC);
     return $row;
+}
+
+function getApproved($user_id){
+    include_once("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT p.place_name, p.description, p.add_date, p.image FROM places as p WHERE place_added_by=? 
+                              AND checked_by_admin=1");
+    $statement->execute(array($user_id));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+    if(empty($result)){
+        return false;
+    }else {
+        return $result;
+    }
+}
+
+function getDisapproved($user_id){
+    include_once ("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT p.place_name, p.description, p.add_date, p.image FROM places as p WHERE place_added_by=? 
+                              AND checked_by_admin=0");
+    $statement->execute(array($user_id));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+
+    if(empty($result)){
+        return false;
+    }else{
+        return $result;
+    }
+}
+
+function sendMessage($user_id,$message){
+    include_once ("db_model.php");
+    $statement=$pdo->prepare("INSERT INTO message(user_id,user_msg, date_msg) VALUES (?,?,now())");
+    $statement->execute(array($user_id,$message));
+    return 1;
+}
+
+function showOutbox($user_id){
+    include_once ("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT user_msg, date_msg FROM message WHERE admin_msg IS NULL AND user_id=?");
+    $statement->execute(array($user_id));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+    if(empty($result)){
+        return false;
+    }else{
+        return $result;
+    }
 }
