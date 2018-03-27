@@ -16,6 +16,8 @@
         <a href="index.php?page=about">Нашата мисия</a>
         <a href="index.php?page=places">Забележителности</a>
         <a href="index.php?page=add">Добави</a>
+        <a href="index.php?page=history">История на добавени обекти от потребител</a>
+        <a href="index.php?page=contact">Връзка с администатор</a>
         <a href="index.php?page=edit">Редактирай профил</a>
         <?php
         if (isset($_SESSION["user"])) {
@@ -30,4 +32,6 @@
 
     </nav>
 </header>
+
+<!--<main>-->
 

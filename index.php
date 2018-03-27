@@ -18,14 +18,19 @@ if (isset($_SESSION["user"])) {
         require_once("views/users/sightseeing.php");
     } elseif ($page === "mountin") {
         require_once("views/users/mountin.php");
-    }elseif ($page==="edit"){
+    } elseif ($page === "edit") {
         require_once("views/users/edit.php");
     } elseif ($page == "logout") {
         session_destroy();
         header("location:index.php?page=places");
-    }elseif ($page==="add"){
+    } elseif ($page === "add") {
         require_once("views/users/add.php");
-    }if ($page==="places"){
+    } elseif ($page === "history") {
+        require_once("views/users/history.php");
+    }elseif ($page==="contact"){
+        require_once ("views/users/contact.php");
+    }
+    if ($page === "places") {
         require_once("views/users/places.php");
     }
 } else {
@@ -40,8 +45,8 @@ if (isset($_SESSION["user"])) {
 
 
 //require_once("views/users/" . $page . ".php");
-require_once("views/layouts/footer.php");
+//require_once("views/layouts/footer.php");
 
-echo "Pyrva proba";
-echo "vtora proba";
-echo "Neko Treci";
+//echo "Pyrva proba";
+//echo "vtora proba";
+//echo "Neko Treci";
