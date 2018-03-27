@@ -4,15 +4,13 @@
 
 function selectUser(){
     include_once("db_model.php");
-    $statement = $pdo->prepare("SELECT * FROM users");
+    $result =[];
+    $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users");
     $statement->execute();
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
-    if (empty($row)) {
-        return null;
-    } else {
-        return $row;
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
     }
-
+        return $result;
 }
 
 
@@ -20,25 +18,25 @@ function selectUser(){
 
 function selectCheckPlace(){
     include_once("db_model.php");
-    $statement = $pdo->prepare("SELECT p.id, p.place_name, p.description, p.image, u.username 
+    $result = [];
+    $statement = $pdo->prepare("SELECT p.id, p.place_name, p.description, u.username 
                                 FROM places AS p 
                                 JOIN users AS u 
                                 ON (p.place_added_by = u.id) 
                                 WHERE p.checked_by_admin = 0");
     $statement->execute();
     $row = $statement->fetch(PDO::FETCH_ASSOC);
-    if (empty($row)) {
-        return null;
-    } else {
-        return $row;
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
     }
+        return $result;
 }
 
 //Delete user
 
 function deleteUser($id){
     include_once("db_model.php");
-        $del = $pdo->prepare("DELETE * from users WHERE user_id=?");
+        $del = $pdo->prepare("DELETE FROM users WHERE id=?");
         $del->execute([$id]);
 
 }
