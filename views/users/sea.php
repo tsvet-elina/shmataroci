@@ -36,19 +36,21 @@
 
                             var clicked = this.value;
                             var value_comment = document.getElementById("p" + clicked).value;
-                            document.getElementById("p" + clicked).value=null;
-                            console.log(value_comment + clicked);
-                            var request2 = new XMLHttpRequest();
-                            request2.open("post", "controllers/places_controller.php");
-                            request2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            request2.onreadystatechange = function () {
-                                if (request2.status === 200 && request2.readyState === 4) {
-                                    console.log("success");
-                                    // p.innerHTML = this.responseText;
+                            if (value_comment !== "") {
+                                document.getElementById("p" + clicked).value = null;
+                                console.log(value_comment + clicked);
+                                var request2 = new XMLHttpRequest();
+                                request2.open("post", "controllers/places_controller.php");
+                                request2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                request2.onreadystatechange = function () {
+                                    if (request2.status === 200 && request2.readyState === 4) {
+                                        console.log("success");
+                                        // p.innerHTML = this.responseText;
 
+                                    }
                                 }
+                                request2.send("id=" + clicked + "&comment=" + value_comment);
                             }
-                            request2.send("id=" + clicked + "&comment=" + value_comment);
                         }
                         button_show.onclick = function () {
                             comment_holder.innerHTML = "";
@@ -105,7 +107,7 @@
 
                         //----------------------------------
                         button_like.onclick = function () {
-                        //    alert(this.value);
+                            //    alert(this.value);
                             var clicked_l = this.value;
                             var request_like = new XMLHttpRequest();
                             request_like.open("get", "controllers/places_controller.php?like=" + clicked_l);

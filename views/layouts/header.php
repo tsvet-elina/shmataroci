@@ -7,10 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="assets/javascripts/application.js"></script>
     <link href="assets/stylesheets/application.css" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
-<header class="header">
+
+<header class="header" id="header">
     <nav class="nav">
 
         <a href="index.php?page=about">Нашата мисия</a>
@@ -32,6 +34,8 @@
 
     </nav>
 </header>
+
+
 
 <!--<main>-->
 

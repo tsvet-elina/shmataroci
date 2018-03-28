@@ -3,22 +3,35 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
+    background-image: url("https://www.produzionidalbasso.com/media/projects/17606/images/Green-mountain-HD-wallpaper.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
 }
 .header{
     width: 100%;
     height: 20%;
-    background-color: rgba(114, 155, 255, 0.87);
+    background-image: url("http://hemic.com/wp-content/themes/hemic/images/sky-1.png");
+    background-size: 100% 100%;
 }
 .main{
     width: 100%;
     height: 65%;
-    /*background-color: rgba(72, 61, 139, 0.85);*/
+    /*background-color: rgba(72, 61, 139, 0.85);*!*/
+    /*background-image: url("/assets/images/CLogo/body.jpg");*/
 }
 .footer{
-    width: 100%;
-    height: 15%;
-    background-color: rgba(67, 26, 139, 0.87);
-    text-align: center;
+    position:fixed;
+    bottom:0;
+
+}
+footer{
+    background-image: url("http://www.pngall.com/wp-content/uploads/2016/03/Grass-PNG-Images.png");
+    background-size: contain;
+
+   width: 100%;
 }
 
 .main img {
@@ -33,12 +46,12 @@ html, body {
 }
 #approved{
     width: 50%;
-    background-color: rgba(0, 128, 0, 0.58);
+    background-color: rgba(0, 128, 0, 0.47);
     border-radius: 5px;
     float:left;
 }
 #approved div{
-    background-color: rgba(43, 84, 44, 0.85);
+    background-color: rgba(43, 84, 44, 0.51);
     border-radius: 5px;
 }
 
@@ -49,7 +62,7 @@ html, body {
 }
 
 #waiting {
-    background-color: rgba(255, 0, 0, 0.59);
+    background-color: rgba(255, 0, 0, 0.43);
     border-radius: 5px;
     float:left;
     width: 50%;
@@ -58,7 +71,7 @@ html, body {
 }
 
 #waiting div{
-    background-color: rgba(255, 0, 0, 0.85);
+    background-color: rgba(255, 0, 0, 0.47);
     border-radius: 5px;
 }
 
@@ -73,11 +86,11 @@ html, body {
 }
 
 #sec>div {
-    background-color: rgba(255, 255, 0, 0.44);
+    background-color: rgba(255, 255, 0, 0.74);
     width: 90%;
     margin: auto;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px khaki ;
+    box-shadow: 5px 5px 22px khaki ;
 
 }
 #sec #com {
@@ -85,9 +98,53 @@ html, body {
     border-radius: 5px;
     width: 80%;
     margin: auto;
-    box-shadow: 5px 5px 5px khaki ;
+    box-shadow: 5px 5px 22px khaki ;
+}
+#sec p {
+    font-size: 18px;
+}
+#com p { font-size: 15px;}
+
+#holderContactForms{
+    background-color: rgba(240, 230, 140, 0.51);
+    width: 80%;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 5px 5px 50px rgba(128, 95, 80, 0.72);
+    border-color: #1dc1da;
 }
 
-color{
-    color: rgb(255, 147, 251);
+#holderContactForms div{
+    background-color: rgba(131, 218, 148, 0.41);
+    border-radius: 5px;
+    box-shadow: 5px 5px 50px rgba(255, 254, 15, 0.47);
 }
+
+#menu{
+    width: 800px;
+    margin:auto;
+
+}
+#menu button{
+    min-width: 250px;
+    border-radius: 5px;
+    background-color: rgba(183, 174, 83, 0.43);
+    font-style: italic;
+}
+
+#menu button:hover{
+    color: white;
+    background-color: #8cb65b;
+    box-shadow: 5px 5px 50px rgb(157, 207, 189);
+    font-family: Bahnschrift;
+}
+
+#logoContact{
+    margin-left: 41%;
+    width: 250px;
+
+}
+
+
+
+

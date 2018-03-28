@@ -204,7 +204,22 @@ function sendMessage($user_id,$message){
 function showOutbox($user_id){
     include_once ("db_model.php");
     $result=[];
-    $statement=$pdo->prepare("SELECT user_msg, date_msg FROM message WHERE admin_msg IS NULL AND user_id=?");
+    $statement=$pdo->prepare("SELECT user_msg, date_msg FROM message WHERE user_id=?");
+    $statement->execute(array($user_id));
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+    if(empty($result)){
+        return false;
+    }else{
+        return $result;
+    }
+}
+
+function showInbox($user_id){
+    include_once ("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT user_msg, admin_msg, date_msg FROM message WHERE user_id=? AND admin_msg IS NOT NULL");
     $statement->execute(array($user_id));
     while($row=$statement->fetch(PDO::FETCH_ASSOC)){
         $result[]=$row;
