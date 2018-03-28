@@ -36,7 +36,7 @@
 
                             var clicked = this.value;
                             var value_comment = document.getElementById("p" + clicked).value;
-
+                            document.getElementById("p" + clicked).value=null;
                             console.log(value_comment + clicked);
                             var request2 = new XMLHttpRequest();
                             request2.open("post", "controllers/places_controller.php");
@@ -59,10 +59,14 @@
                                 if (request_comment.status === 200 && request_comment.readyState === 4) {
                                     var response_comment = JSON.parse(this.responseText);
                                     for (var com in response_comment) {
+                                        var div21=document.createElement("div");
+                                        div21.id="com";
                                         for (var ea_com in response_comment[com]) {
                                             var p2 = document.createElement("p");
+
                                             p2.innerHTML = ea_com + " : " + response_comment[com][ea_com];
-                                            comment_holder.appendChild(p2);
+                                            div21.appendChild(p2);
+                                            comment_holder.appendChild(div21);
                                             comment_holder.style.visibility = "visible";
                                             document.getElementById(info_clicked).appendChild(comment_holder);
                                         }
@@ -101,7 +105,7 @@
 
                         //----------------------------------
                         button_like.onclick = function () {
-                            alert(this.value);
+                            //    alert(this.value);
                             var clicked_l = this.value;
                             var request_like = new XMLHttpRequest();
                             request_like.open("get", "controllers/places_controller.php?like=" + clicked_l);

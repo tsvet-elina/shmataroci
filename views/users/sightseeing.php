@@ -36,7 +36,7 @@
 
                             var clicked = this.value;
                             var value_comment = document.getElementById("p" + clicked).value;
-
+                            document.getElementById("p" + clicked).value=null;
                             console.log(value_comment + clicked);
                             var request2 = new XMLHttpRequest();
                             request2.open("post", "controllers/places_controller.php");
@@ -59,10 +59,14 @@
                                 if (request_comment.status === 200 && request_comment.readyState === 4) {
                                     var response_comment = JSON.parse(this.responseText);
                                     for (var com in response_comment) {
+                                        var div21=document.createElement("div");
+                                        div21.id="com";
                                         for (var ea_com in response_comment[com]) {
                                             var p2 = document.createElement("p");
+
                                             p2.innerHTML = ea_com + " : " + response_comment[com][ea_com];
-                                            comment_holder.appendChild(p2);
+                                            div21.appendChild(p2);
+                                            comment_holder.appendChild(div21);
                                             comment_holder.style.visibility = "visible";
                                             document.getElementById(info_clicked).appendChild(comment_holder);
                                         }
@@ -93,7 +97,7 @@
                                 var checked_if_liked = JSON.parse(this.responseText);
                                 for (var like in checked_if_liked) {
                                     console.log(checked_if_liked[like]["place_id"]);//   PROWERKA!
-                                 document.getElementById("like"+checked_if_liked[like]["place_id"]).style.backgroundColor="green";
+                                    document.getElementById("like"+checked_if_liked[like]["place_id"]).style.backgroundColor="green";
                                 }
                             }
                         }
@@ -101,7 +105,7 @@
 
                         //----------------------------------
                         button_like.onclick = function () {
-                            alert(this.value);
+                            //    alert(this.value);
                             var clicked_l = this.value;
                             var request_like = new XMLHttpRequest();
                             request_like.open("get", "controllers/places_controller.php?like=" + clicked_l);
@@ -154,7 +158,7 @@
 
                     }else if(each==="image"){
                         console.log("img e tuk");
-                       // var image="<img src="+response[item]["image"]+">";
+                        // var image="<img src="+response[item]["image"]+">";
                         var image=document.createElement("IMG");
                         image.setAttribute("src", response[item][each]);
                         div.appendChild(image);

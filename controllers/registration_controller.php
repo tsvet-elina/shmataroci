@@ -44,11 +44,7 @@ if (isset($_POST["register"])) {
     }
 
     if (empty($error)) {
-
-
-
         $result = addUserToDB($username, $password, $email, $gender, $age, $url);
-
         if ($result) {
             $infoReg = "Successful registration";
             $_SESSION["user"] = $result;
@@ -57,5 +53,7 @@ if (isset($_POST["register"])) {
             $infoReg = "Try again";
             header("location: ../index.php?page=registration");
         }
+    } else {
+        header("location: ../index.php?page=registration");
     }
 }

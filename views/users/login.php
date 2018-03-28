@@ -1,10 +1,4 @@
-<?php
-//
-//require_once ("../../controllers/login_controller.php");
-//
-//?>
 <section class="main">
-
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
