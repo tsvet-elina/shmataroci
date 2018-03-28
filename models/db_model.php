@@ -1,9 +1,9 @@
 <?php
-const DB_NAME = "shmatki";
-const DB_IP = "192.168.8.22";
+const DB_NAME = "projectdb";
+const DB_IP = "127.0.0.1";
 const DB_PORT = "3306";
-const DB_USER = "ittstudent";
-const DB_PASS = "ittstudent-123";
+const DB_USER = "root";
+const DB_PASS = "";
 
 $users = array();
 $pdo = null;
