@@ -4,13 +4,15 @@
 
 function selectUser(){
     include_once("db_model.php");
-    $result =[];
+
+    $result = [];
     $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users");
     $statement->execute();
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
-        $result[]=$row;
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[] = $row;
     }
-        return $result;
+    return $result;
+
 }
 
 
@@ -43,7 +45,7 @@ function deleteUser($id){
 
 //Add place added by user
 
-function addPlaceAddedByUsers($id){
+function addPlaceAddedByUser($id){
     include_once("db_model.php");
     $del = $pdo->prepare("UPDATE places SET checked_by_admin=1 WHERE id=?");
     $del->execute([$id]);
@@ -53,7 +55,43 @@ function addPlaceAddedByUsers($id){
 
 function deletePlaceAddedByUser($id){
     include_once("db_model.php");
-    $del = $pdo->prepare("DELETE * from places WHERE id=?");
+    $del = $pdo->prepare("DELETE FROM places WHERE id=?");
     $del->execute([$id]);
 
+}
+
+//Select comments
+
+function selectComments(){
+    include_once("db_model.php");
+    $result = [];
+    $statement = $pdo->prepare("SELECT  c.id, u.username, p.place_name, c.comment_place
+                                FROM places AS p 
+                                JOIN comments AS c  
+                                ON (c.place_id = p.id)  
+                                JOIN users AS u
+                                ON (c.user_id = u.id)");
+    $statement->execute();
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[] = $row;
+    }
+    return $result;
+}
+
+
+//Delete comments
+
+function deleteComment($id){
+    include_once("db_model.php");
+    $del = $pdo->prepare("DELETE FROM comments WHERE id=?");
+    $del->execute([$id]);
+}
+
+//Add place
+
+function addPlace($placeName, $desc, $addedBy, $image){
+    include_once("db_model.php");
+    $del = $pdo->prepare("INSERT INTO places (place_name, description, place_like, place_added_by, checked_by_admin, image)
+                          VALUES (?,?, 0 ,?, 1 ,?);");
+    $del->execute([$placeName,$desc,$addedBy,$image]);
 }

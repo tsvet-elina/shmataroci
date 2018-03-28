@@ -10,23 +10,23 @@
 					        </div>
 
 			  				<div class="panel-body">
-			  					<form class="form-horizontal" role="form" action="control.php" method="post">
+			  					<form class="form-horizontal" enctype="multipart/form-data" role="form" action="../../controllers/admin_controller.php" method="post">
 								  <div class="form-group">
 								    <label class="col-sm-2 control-label">Name</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="name" placeholder="Name">
+								      <input type="text" class="form-control" name="placename" placeholder="Name">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label  class="col-sm-2 control-label">Image</label>
 								    <div class="col-sm-10">
-								      <input type="file" >
+								      <input type="file" name="placeimg">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label class="col-sm-2 control-label">Textarea</label>
 								    <div class="col-sm-10">
-								      <textarea class="form-control" placeholder="Text" rows="3"></textarea>
+								      <textarea class="form-control" placeholder="Text" rows="3" name="desc"></textarea>
 								    </div>
 								  </div>
 								  

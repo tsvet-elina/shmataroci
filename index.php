@@ -13,8 +13,8 @@ if (isset($_GET["page"])) {
 
 if (isset($_SESSION["user"])) {
 
-    if ($_SESSION["user"]["is_admin"] !== null) {
-        header("location:views/admin/index_admin.html");
+    if ($_SESSION["user"]["is_admin"] != NULL) {
+        header("Location: views/admin/index_admin.html");
     } else {
         if ($page === "sea") {
             require_once("views/users/sea.php");
@@ -50,10 +50,6 @@ if (isset($_SESSION["user"])) {
     }
 }
 
+require_once("views/layouts/footer.php");
 
-//require_once("views/users/" . $page . ".php");
-//require_once("views/layouts/footer.php");
 
-//echo "Pyrva proba";
-//echo "vtora proba";
-//echo "Neko Treci";

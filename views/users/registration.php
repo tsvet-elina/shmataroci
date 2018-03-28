@@ -7,7 +7,6 @@
 <!--</script>-->
 <!---->
 
-
 <section class="main">
 
     <form method="post" action="controllers/registration_controller.php" enctype="multipart/form-data"

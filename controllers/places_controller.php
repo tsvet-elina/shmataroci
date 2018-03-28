@@ -111,3 +111,9 @@ if(isset($_GET["out"])){
     $user_id=$_SESSION["user"]["id"];
    echo json_encode(showOutbox($user_id));
 }
+
+if(isset($_GET["in"])){
+    require_once "../models/user.php";
+    $user_id=$_SESSION["user"]["id"];
+    echo json_encode(showInbox($user_id));
+}

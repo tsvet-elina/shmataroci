@@ -13,7 +13,7 @@
             if (response === false) {
                 var holderApproved = document.createElement("div");
                 var p = document.createElement("p");
-                p.innerHTML = "No objects to approve!";
+                p.innerHTML = "Нямате одобрени обекти!";
                 holderApproved.appendChild(p);
                 divA.appendChild(holderApproved);
             } else {
@@ -56,6 +56,7 @@
                 var p=document.createElement("p");
                 p.innerHTML="Нямате обекти, които чакат да бъдат одобрени!";
                 holderDisapproved.appendChild(p);
+                divDIS.appendChild(holderDisapproved);
             }else{
                 for(var item in responseDA){
                     var holderDisapproved= document.createElement("div");

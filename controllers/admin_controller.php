@@ -1,22 +1,11 @@
 <?php
 require_once "../models/admin.php";
-
 if(isset($_GET["info"])){
 
     // load table
 
     if($_GET["info"] == "users"){
-//        $arr = [];
-//        $arr[] = ["user_id" => 51, "username" => "Tsve", "email" => "da@da.da", "gender" => "female", "age" => 13];
-//        $arr[] = ["user_id" => 672, "username" => "Tsvete", "email" => "da@da.da", "gender" => "female", "age" => 23];
-//        $arr[] = ["user_id" => 38, "username" => "Tsvetelina", "email" => "da@da.da", "gender" => "female", "age" => 12];
-//        $arr[] = ["user_id" => 674, "username" => "Tsve12", "email" => "da@da.da", "gender" => "female", "age" => 3];
-//        $arr[] = ["user_id" => 675, "username" => "Tsvea", "email" => "da@da.da", "gender" => "female", "age" => 1];
-//        $arr[] = ["user_id" => 96, "username" => "Tsveopa", "email" => "da@da.da", "gender" => "female", "age" => 23];
-//        $arr[] = ["user_id" => 70, "username" => "Tsvene", "email" => "da@da.da", "gender" => "female", "age" => 24];
-//
-//
-//            echo json_encode($arr);
+
 
         $selectUser = selectUser();
         echo json_encode($selectUser);
@@ -26,18 +15,22 @@ if(isset($_GET["info"])){
     // load place
 
     if($_GET["info"] == "check"){
-//        $arr = [];
-//        $arr[] = ["id" => 5, "place_name" => "Tsve", "description" => "da@da.da", "added_by" => "female",];
-//        $arr[] = ["id" => 1, "place_name" => "Tsve", "description" => "da@da.da", "added_by" => "female",];
-//        $arr[] = ["id" => 34, "place_name" => "Tsve", "description" => "da@da.da", "added_by" => "female",];
-//        $arr[] = ["id" => 61, "place_name" => "Tsve", "description" => "da@da.da", "added_by" => "female",];
-//
-//
-//        echo json_encode($arr);
+
 
         $selectCheckedPlace = selectCheckPlace();
         echo json_encode($selectCheckedPlace);
 
+    }
+    if($_GET["info"] == "comments"){
+        $selectComments = selectComments();
+        echo json_encode($selectComments);
+    }
+
+
+    //log out
+    if($_GET['info'] == "logout"){
+        session_destroy();
+        header("Location: ../index.php");
     }
 }
 
@@ -47,7 +40,6 @@ if(isset($_GET["info"])){
         if(isset($_POST['user_id'])) {
               $id = $_POST['user_id'];
               deleteUser($id);
-              echo $id;
 
         }
 
@@ -56,7 +48,7 @@ if(isset($_GET["info"])){
 
         if(isset($_POST['place_add_id'])) {
             $id = $_POST['place_add_id'];
-            addPlaceAddedByUsers($id);
+            addPlaceAddedByUser($id);
 
         }
 
@@ -67,3 +59,49 @@ if(isset($_GET["info"])){
             $id = $_POST['place_delete_id'];
             deletePlaceAddedByUser($id);
         }
+
+
+//delete comment
+/*--- from index_admin.html -----*/
+
+        if(isset($_POST['comment_id'])){
+            $id = $_POST['comment_id'];
+            deleteComment($id);
+        }
+
+//Add new place
+
+if(isset($_POST['add'])){
+
+          $img = $_FILES['placeimg']['tmp_name'];
+          $name = $_POST["placename"];
+            function transliterate($textcyr = null, $textlat = null) {
+                $cyr = array(
+                    'ж',  'ч',  'щ',   'ш',  'ю',  'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ъ', 'ь', 'я',
+                    'Ж',  'Ч',  'Щ',   'Ш',  'Ю',  'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ъ', 'Ь', 'Я');
+                $lat = array(
+                    'zh', 'ch', 'sht', 'sh', 'yu', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'y', 'x', 'q',
+                    'Zh', 'Ch', 'Sht', 'Sh', 'Yu', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'c', 'Y', 'X', 'Q');
+                if($textcyr) return str_replace($cyr, $lat, $textcyr);
+                else if($textlat) return str_replace($lat, $cyr, $textlat);
+                else return null;
+            }
+
+         // $name = transliterate($name);
+          if(is_uploaded_file($img)){
+              $url = "../assets/image_places/".transliterate($name).".jpg";
+              if(move_uploaded_file($img, $url)){
+
+              }
+          }
+          $placeName = $_POST['placename'];
+          $desc = $_POST['desc'];
+          $image = "assets/image_places/".transliterate($name).".jpg";
+          $addedBy = $_SESSION['user']['id'];
+          addPlace($placeName, $desc, $addedBy, $image);
+            header("location:../views/admin/index_admin.html");
+
+
+
+}
+
