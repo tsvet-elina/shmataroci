@@ -161,6 +161,7 @@ function getNumberOfLikes($place_id){
     return $row;
 }
 
+
 function getApproved($user_id){
     include_once("db_model.php");
     $result=[];
@@ -230,3 +231,4 @@ function showInbox($user_id){
         return $result;
     }
 }
+

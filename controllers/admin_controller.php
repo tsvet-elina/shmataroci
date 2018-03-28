@@ -1,12 +1,11 @@
 <?php
 require_once "../models/admin.php";
-session_start();
-
 if(isset($_GET["info"])){
 
     // load table
 
     if($_GET["info"] == "users"){
+
 
         $selectUser = selectUser();
         echo json_encode($selectUser);
@@ -17,6 +16,7 @@ if(isset($_GET["info"])){
 
     if($_GET["info"] == "check"){
 
+
         $selectCheckedPlace = selectCheckPlace();
         echo json_encode($selectCheckedPlace);
 
@@ -25,6 +25,7 @@ if(isset($_GET["info"])){
         $selectComments = selectComments();
         echo json_encode($selectComments);
     }
+
 
     //log out
     if($_GET['info'] == "logout"){
@@ -58,6 +59,7 @@ if(isset($_GET["info"])){
             $id = $_POST['place_delete_id'];
             deletePlaceAddedByUser($id);
         }
+
 
 //delete comment
 /*--- from index_admin.html -----*/
@@ -102,3 +104,4 @@ if(isset($_POST['add'])){
 
 
 }
+

@@ -21,23 +21,23 @@
         <div class="row">
             <div class="col-md-5">
 
-                <div class="logo"> 
+                <div class="logo">
                     <h1><img src="../../assets/images/Logosm.png" style="height:45px; width: 400px; "></h1>
-                </div> 
-            </div>
-           <!--  <div class="col-md-5">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="input-group form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-                        </div>
-                    </div>
                 </div>
-            </div> -->
-           
+            </div>
+            <!--  <div class="col-md-5">
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <div class="input-group form">
+                             <input type="text" class="form-control" placeholder="Search...">
+                             <span class="input-group-btn">
+                              <button class="btn btn-primary" type="button">Search</button>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+             </div> -->
+
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
 
                     <li><a id="check"><i class="glyphicon glyphicon-pencil"></i> Check Place</a></li>
                     <li><a id="forms"><i class="glyphicon glyphicon-tasks"></i> Add Place</a></li>
-                    <li><a onclick = "logOut();"><i></i> LOG OUT</a></li>
+                    <li><a onclick="logOut();"><i></i> LOG OUT</a></li>
                     <!-- <li class="submenu">
                         <a href="#">
                             <i class="glyphicon glyphicon-list"></i> Pages
@@ -71,31 +71,30 @@
             </div>
         </div>
 
-       <!--  <div id="div1" class="col-sm-8">
-            <div class="panel-heading">
-            </div>
-        </div> -->
+        <!--  <div id="div1" class="col-sm-8">
+             <div class="panel-heading">
+             </div>
+         </div> -->
         <div id="div1"></div>
 
-            <div class="col-sm-8" id="main">
-                <div class="panel-heading">
-                    <div class="panel-title">COMMENTS</div>
-                </div>
-                <div class="panel-body" id="my">
-
-                </div>
+        <div class="col-sm-8" id="main">
+            <div class="panel-heading">
+                <div class="panel-title">COMMENTS</div>
             </div>
+            <div class="panel-body" id="my">
 
+            </div>
+        </div>
 
 
         <!--<footer>-->
-            <!--<div class="container">-->
+        <!--<div class="container">-->
 
-                <!--<div class="copy text-center">-->
-                    <!--Copyright 2014 <a href='#'>Website</a>-->
-                <!--</div>-->
+        <!--<div class="copy text-center">-->
+        <!--Copyright 2014 <a href='#'>Website</a>-->
+        <!--</div>-->
 
-            <!--</div>-->
+        <!--</div>-->
         <!--</footer>-->
 
         <link href="../../assets/vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
@@ -111,38 +110,35 @@
         <link rel="stylesheet" href="../../assets/vendors/morris/morris.css">
 
 
-        
-
         <script src="../../assets/vendors/datatables/dataTables.bootstrap.js"></script>
-        
 
 
         <script src="../../assets/js/custom.js"></script>
         <script src="../../assets/js/tables.js"></script>
-        
+
 
 </body>
 
 <script>
 
-    $("#table").click(function(){
+    $("#table").click(function () {
         $('#div1').load('delete_users.html');
-        $( "#main" ).hide();
+        $("#main").hide();
     });
 
-    $("#stat").click(function(){
+    $("#stat").click(function () {
         $('#div1').load('stats.html');
-        $( "#main" ).hide();
+        $("#main").hide();
     });
 
-    $("#check").click(function(){
+    $("#check").click(function () {
         $('#div1').load('check_place.html');
-        $( "#main" ).hide();
+        $("#main").hide();
     });
 
-    $("#forms").click(function(){
+    $("#forms").click(function () {
         $('#div1').load('add_place.html');
-        $( "#main" ).hide();
+        $("#main").hide();
     });
 
     var request = new XMLHttpRequest();
@@ -163,7 +159,7 @@
 
             for (var j = 0; j < example.length; j++) {
 
-                str += "<tr id=\""+j+"\">";
+                str += "<tr id=\"" + j + "\">";
 
 
                 for (var item in example[j]) {
@@ -173,14 +169,15 @@
                     str += example[j][item];
                     str += "</td>";
 
-                    if(item == "id"){
+
+                    if (item == "id") {
                         mainVar = example[j][item];
                     }
 
 
                 }
 
-                str += "<td><button class=\"btn btn-danger btn-sm\" onclick=\"myDeleteFunction("+ j +"); deleteCom("+ mainVar +");\">Delete</button></td>";
+                str += "<td><button class=\"btn btn-danger btn-sm\" onclick=\"myDeleteFunction(" + j + "); deleteCom(" + mainVar + ");\">Delete</button></td>";
                 str += "</tr>";
                 console.log(mainVar);
 
@@ -205,17 +202,17 @@
     function deleteCom(mainVar) {
         var r = new XMLHttpRequest();
         var id = mainVar;
-        r.open("post", "../../controllers/admin_controller.php" );
-        r.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        r.open("post", "../../controllers/admin_controller.php");
+        r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         r.onreadystatechange = function (ev) {
             if (!(r.status === 200 && r.readyState === 4)) {
-            }else{
+            } else {
 
                 console.log(this.responseText);
             }
         }
         console.log(id);
-        r.send("comment_id="+id);
+        r.send("comment_id=" + id);
 
     }
 
@@ -224,7 +221,7 @@
         r.open("get", "../../controllers/admin_controller.php?info=logout");
         r.onreadystatechange = function (ev) {
             if (!(r.status === 200 && r.readyState === 4)) {
-            }else{
+            } else {
                 var newLocation = "../../index.php";
                 window.location = newLocation;
             }
@@ -232,9 +229,6 @@
         r.send();
 
     }
-
-
-
 
 
 </script>

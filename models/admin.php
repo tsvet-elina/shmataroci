@@ -4,6 +4,7 @@
 
 function selectUser(){
     include_once("db_model.php");
+
     $result = [];
     $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users");
     $statement->execute();
@@ -26,11 +27,11 @@ function selectCheckPlace(){
                                 ON (p.place_added_by = u.id) 
                                 WHERE p.checked_by_admin = 0");
     $statement->execute();
-    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-        $result[] = $row;
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
     }
-    return $result;
-
+        return $result;
 }
 
 //Delete user

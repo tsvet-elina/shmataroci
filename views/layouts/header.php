@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="assets/javascripts/application.js"></script>
+    <script type="text/javascript" src="assets/javascripts/validation.js" ></script>
     <link href="assets/stylesheets/application.css" rel="stylesheet">
 
     <title>Document</title>

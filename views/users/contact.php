@@ -2,11 +2,13 @@
 
 <div id="menu">
 <button onclick="showInbox()">Входящи</button>
+
 <button onclick="showOutbox()">Изходящи</button>
 <button onclick="showInfoContacts()">Напиши съобщение до АДМИНИСТАТОР</button>
 </div>
 <div id="holderContactForms"></div>
 <div id="errHolder"></div>
+
 
 
 <script>

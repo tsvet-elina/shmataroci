@@ -22,6 +22,7 @@ html, body {
     /*background-color: rgba(72, 61, 139, 0.85);*!*/
     /*background-image: url("/assets/images/CLogo/body.jpg");*/
 }
+
 .footer{
     position:fixed;
     bottom:0;
@@ -120,6 +121,7 @@ footer{
     box-shadow: 5px 5px 50px rgba(255, 254, 15, 0.47);
 }
 
+
 #menu{
     width: 800px;
     margin:auto;
@@ -144,6 +146,7 @@ footer{
     width: 250px;
 
 }
+
 
 
 
