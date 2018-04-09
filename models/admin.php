@@ -35,10 +35,16 @@ function selectCheckPlace(){
 
 //Delete user
 
-function deleteUser($id){
+function deleteUser($addedBy,$id){
     include_once("db_model.php");
-        $del = $pdo->prepare("DELETE FROM users WHERE id=?");
-        $del->execute([$id]);
+        $count = $pdo->query("SELECT COUNT(*) FROM places");
+
+        
+        $del = $pdo->prepare("UPDATE places SET place_added_by=? WHERE id=?");
+        while($del->execute([$addedBy, $id]) <= $count){
+        }
+        $st = $pdo->prepare("DELETE FROM users WHERE id=?");
+        $st->execute([$id]);
 
 }
 

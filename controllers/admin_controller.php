@@ -38,7 +38,8 @@ if(isset($_GET["info"])){
 
         if(isset($_POST['user_id'])) {
               $id = $_POST['user_id'];
-              deleteUser($id);
+            $addedBy = $_SESSION['user']['id'];
+            deleteUser($addedBy,$id);
 
         }
 
