@@ -49,24 +49,14 @@
                 <ul class="nav">
 
                     <li><a href=""><i class="glyphicon glyphicon-home"></i>Comments</a></li>
-                    <!--<li><a href="calendar.html"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>-->
                     <li><a id="stat"><i class="glyphicon glyphicon-stats"></i> Statistics</a></li>
                     <li><a id="table"><i class="glyphicon glyphicon-list"></i> Users</a></li>
-
                     <li><a id="check"><i class="glyphicon glyphicon-pencil"></i> Check Place</a></li>
                     <li><a id="forms"><i class="glyphicon glyphicon-tasks"></i> Add Place</a></li>
-                    <li><a onclick="logOut();"><i></i> LOG OUT</a></li>
-                    <!-- <li class="submenu">
-                        <a href="#">
-                            <i class="glyphicon glyphicon-list"></i> Pages
-                            <span class="caret pull-right"></span>
-                        </a>
+                    <li><a id="news"><i class="glyphicon glyphicon-globe"></i> Add News</a></li>
+                    <li><a id="questions"><i class="glyphicon glyphicon-question-sign"></i> Questions</a></li>
+                    <li><a onclick="logOut();"><i class="glyphicon glyphicon-remove"></i> LOG OUT</a></li>
 
-                        <ul>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                        </ul>
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -88,15 +78,15 @@
 
 
         <!--<footer>-->
-        <!--<div class="container">-->
 
+            <!---->
         <!--<div class="copy text-center">-->
         <!--Copyright 2014 <a href='#'>Website</a>-->
         <!--</div>-->
+            <!---->
 
-        <!--</div>-->
         <!--</footer>-->
-
+        <!---->
         <link href="../../assets/vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
 
 
@@ -138,6 +128,14 @@
 
     $("#forms").click(function () {
         $('#div1').load('add_place.html');
+        $("#main").hide();
+    });
+    $("#questions").click(function () {
+        $('#div1').load('questions.html');
+        $("#main").hide();
+    });
+    $("#news").click(function () {
+        $('#div1').load('add_news.html');
         $("#main").hide();
     });
 
