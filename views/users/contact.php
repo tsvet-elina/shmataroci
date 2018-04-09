@@ -1,10 +1,14 @@
-<div><img src="assets/images/CLogo/contacts.png" width="150" onload="showInfoContacts()"></div>
+<img id="logoContact" src="assets/images/CLogo/contacts.png" width="150" onload="showInfoContacts()">
 
-<button>Входящи</button>
+<div id="menu">
+<button onclick="showInbox()">Входящи</button>
+
 <button onclick="showOutbox()">Изходящи</button>
 <button onclick="showInfoContacts()">Напиши съобщение до АДМИНИСТАТОР</button>
+</div>
 <div id="holderContactForms"></div>
 <div id="errHolder"></div>
+
 
 
 <script>
@@ -63,7 +67,9 @@
                 console.log(response);
                 if (response === false) {
                     div.innerHTML = "";
-                    div.innerHTML = "Нямате изходящи съобщения!";
+                    var p=document.createElement("p");
+                    p.innerHTML="Нямате изходящи съобщения";
+                    div.appendChild(p);
                 } else {
                     div.innerHTML = "";
                     for (var item in response) {
@@ -85,4 +91,36 @@
         }
         request.send();
     }
+
+    function showInbox(){
+        document.getElementById("errHolder").innerHTML="";
+        var div=document.getElementById("holderContactForms");
+        var request=new XMLHttpRequest();
+        request.open("get","controllers/places_controller.php?in=set");
+        request.onreadystatechange=function(){
+            if(request.readyState===4 && request.status===200) {
+                var response=JSON.parse(this.responseText);
+                console.log(response);//PROBA
+                div.innerHTML="";
+                if(response===false){
+                    var p=document.createElement("p");
+                    p.innerHTML="Нямате входящи съобщения";
+                    div.appendChild(p);
+                }else{
+                    for (var item in response) {
+                        var holder = document.createElement("div");
+                        for (var each in response[item]) {
+                            var p = document.createElement("p");
+                            p.innerHTML =each + " : " + response[item][each];
+                            holder.appendChild(p);
+                        }
+                        div.appendChild(holder);
+                    }
+
+                }
+            }
+        }
+        request.send();
+    }
+
 </script>

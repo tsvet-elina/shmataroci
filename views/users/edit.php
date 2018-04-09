@@ -22,9 +22,9 @@
         </div>
         <div>
             <label>Пол</label>
-            <input type="radio" name="genderEdit" value="Male">
-            <input type="radio" name="genderEdit" value="Female">
-            <input type="radio" name="genderEdit" value="Other">
+            <input type="radio" name="genderEdit" value="Male">Male
+            <input type="radio" name="genderEdit" value="Female">Female
+            <input type="radio" name="genderEdit" value="Other">Other
         </div>
         <div>
             <label for="image">Снимка</label>

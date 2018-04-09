@@ -1,7 +1,7 @@
 <!--</main>-->
 <footer class="footer" >
     <div >
-        <p >Copyright &copy; Your Website 2018</p>
+        <strong><p style="text-align: center; color: white" >Copyright &copy; Шматки.БГ</p></strong>
     </div>
 </footer>
 

@@ -5,7 +5,7 @@
 function selectUser(){
     include_once("db_model.php");
     $result = [];
-    $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users");
+    $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users ");
     $statement->execute();
     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
         $result[] = $row;
@@ -26,11 +26,11 @@ function selectCheckPlace(){
                                 ON (p.place_added_by = u.id) 
                                 WHERE p.checked_by_admin = 0");
     $statement->execute();
-    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-        $result[] = $row;
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
     }
-    return $result;
-
+        return $result;
 }
 
 //Delete user
@@ -86,10 +86,10 @@ function selectComments(){
 
 //Delete comments
 
-function deleteComment($id){
+function deleteComment($comment_id){
     include_once("db_model.php");
     $del = $pdo->prepare("DELETE FROM comments WHERE id=?");
-    $del->execute([$id]);
+    $del->execute([$comment_id]);
 }
 
 //Add place
@@ -99,4 +99,92 @@ function addPlace($placeName, $desc, $addedBy, $image){
     $del = $pdo->prepare("INSERT INTO places (place_name, description, place_like, place_added_by, checked_by_admin, image)
                           VALUES (?,?, 0 ,?, 1 ,?);");
     $del->execute([$placeName,$desc,$addedBy,$image]);
+}
+
+//statistic gender
+
+function countDifGenders(){
+    include_once("db_model.php");
+    $st = $pdo->prepare("SELECT CONCAT(\"Female\") as gender ,COUNT(*) as \"visits\" 
+                         FROM users 
+                         WHERE gender = \"F\"");
+    $st->execute();
+    $female = $st->fetch(PDO::FETCH_ASSOC);
+    $sta = $pdo->prepare("SELECT CONCAT(\"Male\") as gender ,COUNT(*) as \"visits\" 
+                          FROM users 
+                          WHERE gender = \"M\"");
+    $sta->execute();
+    $male = $sta->fetch(PDO::FETCH_ASSOC);
+    $stat = $pdo->prepare("SELECT CONCAT(\"Other\") as gender ,COUNT(*) as \"visits\" 
+                           FROM users 
+                           WHERE gender = \"O\"");
+    $stat->execute();
+    $other = $stat->fetch(PDO::FETCH_ASSOC);
+    $result = [];
+    $result[] = $male;
+    $result[] = $female;
+    $result[] = $other;
+    return $result;
+}
+
+//statistic age
+
+function countDifAges(){
+    include_once("db_model.php");
+    $st = $pdo->prepare("SELECT CONCAT(\"0-18\") as groups ,count(*) as counter 
+                         FROM users 
+                         WHERE age <=18;");
+    $st->execute();
+    $kids = $st->fetch(PDO::FETCH_ASSOC);
+    $sta = $pdo->prepare("SELECT CONCAT(\"19-39\") as groups ,count(*) as counter 
+                          FROM users 
+                          WHERE age > 18 AND age < 40");
+    $sta->execute();
+    $adults = $sta->fetch(PDO::FETCH_ASSOC);
+    $stat = $pdo->prepare("SELECT CONCAT(\"40+\") as groups ,count(*) as counter 
+                           FROM users 
+                           WHERE age >= 40 ");
+    $stat->execute();
+    $plus = $stat->fetch(PDO::FETCH_ASSOC);
+    $result = [];
+    $result[] = $kids;
+    $result[] = $adults;
+    $result[] = $plus;
+    return $result;
+}
+
+// select messages
+
+function selectMessages(){
+    include_once("db_model.php");
+    $result = [];
+    $statement = $pdo->prepare("SELECT m.id, u.username, m.date_msg, m.user_msg 
+                                FROM message AS m 
+                                JOIN users AS u
+                                ON (m.user_id = u.id)
+                                AND m.admin_msg IS NULL");
+    $statement->execute();
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[] = $row;
+    }
+    return $result;
+}
+
+function deleteMessage($message_id){
+    include_once("db_model.php");
+    $del = $pdo->prepare("DELETE FROM message WHERE id=?");
+    $del->execute([$message_id]);
+}
+
+function addMessage($answer, $message_id){
+    include_once("db_model.php");
+    $del = $pdo->prepare("UPDATE message SET admin_msg=? WHERE id=?");
+    $del->execute([$answer,$message_id]);
+}
+
+function addNews($newsName, $desc, $image){
+    include_once("db_model.php");
+    $st = $pdo->prepare("INSERT INTO news (name, image, description)
+                          VALUES (?,?,?);");
+    $st->execute([$newsName,$image,$desc]);
 }
