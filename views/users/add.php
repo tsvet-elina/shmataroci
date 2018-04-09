@@ -1,10 +1,11 @@
 <?php
-var_dump($_SESSION["user"]);
+//var_dump($_SESSION["user"]);
 ?>
 
 <section>
-    <h1> Hello, <?= $_SESSION["user"]["username"] ?>!</h1>
-    <h3>Welcome in ADD PLACE Page, You are about to add a new place!</h3>
+    <div id="addPlace">
+    <h1> Здравейте, <?= $_SESSION["user"]["username"] ?>!</h1>
+    <h3>Добре дошли в страницята за добавяне на обекти!</h3>
     <form name="form" method="post" action="controllers/places_controller.php" enctype="multipart/form-data" onsubmit="return formValidation()">
        <div> <input type="text" name="name" placeholder="Име на обекта" id="name"></div>
         <div><textarea name="desc" placeholder="Добавете описание" id="desc"></textarea></div>
@@ -13,6 +14,7 @@ var_dump($_SESSION["user"]);
         <div><input type="submit" name="add"></div>
     </form>
     <div id="errorHolder" style="visibility: hidden;"></div>
+    </div>
 </section>
 
 <script>

@@ -10,29 +10,35 @@ html, body {
     background-repeat: no-repeat;
 
 }
-.header{
+
+.header {
     width: 100%;
-    height: 20%;
+    height: 200px;
     background-image: url("http://hemic.com/wp-content/themes/hemic/images/sky-1.png");
     background-size: 100% 100%;
 }
-.main{
+
+.main {
     width: 100%;
     height: 65%;
     /*background-color: rgba(72, 61, 139, 0.85);*!*/
     /*background-image: url("/assets/images/CLogo/body.jpg");*/
 }
 
-.footer{
-    position:fixed;
-    bottom:0;
+.footer {
+    position: fixed;
+    bottom: 0;
 
 }
-footer{
+/*footer img{*/
+    /*height: 50px;*/
+/*}*/
+footer {
     background-image: url("http://www.pngall.com/wp-content/uploads/2016/03/Grass-PNG-Images.png");
     background-size: contain;
-
-   width: 100%;
+    /*height: 80px;*/
+    width: 100%;
+    /*height: 50px;*/
 }
 
 .main img {
@@ -40,23 +46,25 @@ footer{
     height: 100px;
 }
 
-#approved img{
+#approved img {
     width: 100px;
     height: 100px;
     border-radius: 5px;
 }
-#approved{
+
+#approved {
     width: 50%;
     background-color: rgba(0, 128, 0, 0.47);
     border-radius: 5px;
-    float:left;
+    float: left;
 }
-#approved div{
+
+#approved div {
     background-color: rgba(43, 84, 44, 0.51);
     border-radius: 5px;
 }
 
-#waiting img{
+#waiting img {
     width: 100px;
     height: 100px;
     border-radius: 5px;
@@ -65,48 +73,85 @@ footer{
 #waiting {
     background-color: rgba(255, 0, 0, 0.43);
     border-radius: 5px;
-    float:left;
+    float: left;
     width: 50%;
-
 
 }
 
-#waiting div{
+#waiting div {
     background-color: rgba(255, 0, 0, 0.47);
     border-radius: 5px;
 }
 
-#disapprovedObj{
+#disapprovedObj {
     background-color: rgba(255, 255, 0, 0.6);
     border-radius: 5px;
 }
 
-#approvedObj{
+#approvedObj {
     background-color: rgba(255, 255, 0, 0.6);
     border-radius: 5px;
 }
 
-#sec>div {
-    background-color: rgba(255, 255, 0, 0.74);
+#sec {
+    width: 100%;
+}
+
+#sec > div {
+    /*background-color: rgba(255, 255, 0, 0.74);*/
+    height: auto;
+    box-sizing: border-box;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.57), rgba(0, 128, 0, 0.69), rgba(255, 111, 78, 0.87));
     width: 90%;
     margin: auto;
     border-radius: 5px;
-    box-shadow: 5px 5px 22px khaki ;
+    box-shadow: 5px 5px 22px khaki;
+
 
 }
+
+
 #sec #com {
     background-color: rgba(36, 255, 57, 0.39);
     border-radius: 5px;
     width: 80%;
     margin: auto;
-    box-shadow: 5px 5px 22px khaki ;
+    box-shadow: 5px 5px 22px khaki;
 }
-#sec p {
-    font-size: 18px;
-}
-#com p { font-size: 15px;}
 
-#holderContactForms{
+#sec p {
+text-align: center;
+    box-sizing: border-box;
+    font-size: 18px;
+    width: 100%;
+}
+
+#com p {
+    font-size: 15px;
+}
+#sec button{
+    border-radius: 2px;
+    height: 30px;
+}
+
+#sec textarea{
+    border-radius: 5px;
+    margin-left:30%;
+    width: 300px;
+    height: 30px;
+}
+
+#sec>div> img {
+    width: 350px;
+    height: 200px;
+    box-sizing: border-box;
+    margin-left: 33%;
+    /*float: left;*/
+
+
+}
+
+#holderContactForms {
     background-color: rgba(240, 230, 140, 0.51);
     width: 80%;
     margin: auto;
@@ -115,39 +160,155 @@ footer{
     border-color: #1dc1da;
 }
 
-#holderContactForms div{
+#holderContactForms div {
     background-color: rgba(131, 218, 148, 0.41);
     border-radius: 5px;
     box-shadow: 5px 5px 50px rgba(255, 254, 15, 0.47);
 }
 
-
-#menu{
+#menu {
     width: 800px;
-    margin:auto;
+    margin: auto;
 
 }
-#menu button{
+
+#menu button {
     min-width: 250px;
     border-radius: 5px;
     background-color: rgba(183, 174, 83, 0.43);
     font-style: italic;
 }
 
-#menu button:hover{
+#menu button:hover {
     color: white;
     background-color: #8cb65b;
     box-shadow: 5px 5px 50px rgb(157, 207, 189);
     font-family: Bahnschrift;
 }
 
-#logoContact{
+#logoContact {
     margin-left: 41%;
     width: 250px;
 
 }
 
+header img {
+    margin-left: 41%;
+}
+
+nav {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to right, red, orange, yellow, green);
+    box-shadow: 5px 5px 10px #2fbfc5;
+}
+
+nav > div {
+    box-sizing: border-box;
+    padding-top: 17px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 16px;
+    /*background-color: khaki;*/
+    border-radius: 2px;
+    margin-left: 5%;
+    color: #1e0707;
+
+}
+
+nav a:hover {
+    /*background-color: rgba(255, 0, 0, 0.14);*/
+    border-radius: 2px;
+    box-shadow: 10px 10px 50px whitesmoke;
+    color: #1d1d1d;
+
+}
 
 
+#about{
+    font-family: "Fira Code Light" ;
+    font-size: 16px;
+    padding:1%;
+    margin-left: 15px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.58);
+    color:black;
+    float: left;
+}
+
+#place_cat a{
+    border-radius: 5px;
+}
 
 
+#place_cat img{
+    width: 450px;
+    height:400px;
+    padding:1.5%;
+    box-sizing: content-box;
+    border-radius: 5px;
+}
+
+#place_cat p{
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+#errorHolder{
+    background-color: rgba(255, 101, 30, 0.71);
+}
+#addPlace{
+    background-color: rgba(255, 255, 0, 0.6);
+    width: 80%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: auto;
+    padding:15px;
+}
+
+#addPlace textarea{
+    border-radius: 3px;
+    width: 350px;
+    height: 300px;
+}
+
+#container{
+    padding-bottom: 5%;
+}
+/*#filler{*/
+    /*width: 100%;*/
+    /*height: 5%;*/
+    /*background-color: red;*/
+/*}*/
+
+#newsHolder{
+    /*background-color: rgba(245, 245, 245, 0.43);*/
+    width: 80%;
+    margin:auto;
+}
+#newsHolder div{
+    background-color: rgba(245, 245, 245, 0.54);
+    border-radius: 5px;
+
+}
+
+#newsHolder h1{
+    color: #95051c;
+    text-align: center;
+}
+#newsHolder h3{
+    text-align: center;
+}
+#newsHolder p{
+    text-align: center;
+}
+
+#newsHolder img{
+    margin-left: 44%;
+    width: 350px;
+    height: auto;
+}

@@ -3,23 +3,27 @@
 ?>
 
 <section class="main">
-    <div>
+    <div id="place_cat">
 
-        <a href="index.php?page=sea" onmouseover="sea()" onmouseout="out()">More</a>
-        <a href="index.php?page=mountin">Planina</a>
-        <a href="index.php?page=sightseeing">Zabelejitelnosti</a>
+        <a id="sea" href="index.php?page=sea" onmouseover="on(this.id)" onmouseout="out(this.id)"><img src="./assets/images/CLogo/Bulgaria-BlackSeaCoast.png"></a>
+        <a id="mountin" href="index.php?page=mountin" onmouseover="on(this.id)" onmouseout="out(this.id)"><img src="./assets/images/CLogo/mountLogo.jpg"></a>
+        <a id="sight" href="index.php?page=sightseeing" onmouseover="on(this.id)" onmouseout="out(this.id)"><img src="./assets/images/CLogo/sightseeingsLogo.jpg"></a>
 
     </div>
 </section>
 
 <script>
-    function sea(){
-       var head= document.getElementById("header");
-       head.style.backgroundColor="green";
+
+    function on(y){
+        var id= document.getElementById(y);
+       id.style.boxShadow="10px 20px 30px lightblue";
+
 
     }
-    function out(){
-        var head= document.getElementById("header");
-        head.style.backgroundColor="rgba(114, 155, 255, 0.87)";
+    function out(x){
+
+        var id= document.getElementById(x);
+        id.style.boxShadow="none";
+
     }
 </script>

@@ -14,9 +14,16 @@
 <body>
 
 <header class="header" id="header">
+    <img src="assets/images/CLogo/LogoSite.png" height="100px">
     <nav class="nav">
-
+<div>
+    <?php
+    if (!isset($_SESSION["user"])) {
+    ?>
         <a href="index.php?page=about">Нашата мисия</a>
+    <?php }else{ ?>
+        <a href="index.php?page=news">Новини</a>
+    <?php } ?>
         <a href="index.php?page=places">Забележителности</a>
         <a href="index.php?page=add">Добави</a>
         <a href="index.php?page=history">История на добавени обекти от потребител</a>
@@ -32,9 +39,11 @@
         <?php }
         ?>
 
-
+</div>
     </nav>
 </header>
+
+<div id="container">
 
 
 

@@ -232,3 +232,14 @@ function showInbox($user_id){
     }
 }
 
+function getNews(){
+    include_once ("db_model.php");
+    $result=[];
+    $statement=$pdo->prepare("SELECT * FROM news");
+    $statement->execute();
+    while($row=$statement->fetch(PDO::FETCH_ASSOC)){
+        $result[]=$row;
+    }
+    return $result;
+}
+

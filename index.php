@@ -36,8 +36,10 @@ if (isset($_SESSION["user"])) {
         ($page === "contact") {
             require_once("views/users/contact.php");
         }
-        if ($page === "places") {
+        elseif ($page === "places") {
             require_once("views/users/places.php");
+        }else {
+            require_once("views/users/news.php");
         }
     }
 } else {
