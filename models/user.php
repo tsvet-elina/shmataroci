@@ -6,7 +6,7 @@ function login($email, $password)
 {
     include_once("db_model.php");
     $statement = $pdo->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
-    $statement->execute([$email, $password]);
+    $statement->execute([$email, sha1($password)]);
     $row = $statement->fetch(PDO::FETCH_ASSOC);
     if (empty($row)) {
         return null;
@@ -23,13 +23,13 @@ function addUserToDB($username, $password, $email, $gender, $age, $image)
     try {
         include_once("db_model.php");
         $statement = $pdo->prepare("SELECT email,password FROM users WHERE email =? AND password =?");
-        $statement->execute([$email, $password]);
+        $statement->execute([$email, sha1($password)]);
         $row = $statement->fetch();
         if ($row > 0) {
             return 0;
         } else {
             $reg = $pdo->prepare("INSERT INTO users (username, password, email, gender, age, image) VALUES (?,?,?,?,?,?)");
-            $reg->execute([$username, $password, $email, $gender, $age, $image]);
+            $reg->execute([$username, sha1($password), $email, $gender, $age, $image]);
             //$reg->fetch(PDO::FETCH_ASSOC);
 
             return 1;
@@ -47,7 +47,7 @@ function editUserData($username, $password, $email, $gender, $age, $url, $id)
     include_once("db_model.php");
     $update = $pdo->prepare("UPDATE users  SET username = ?, password =?,email =?,
 gender=?,age=?,image=? , is_admin =? WHERE id = ?");
-    $update->execute([$username, $password, $email, $gender, $age, $url,0, $id]);
+    $update->execute([$username, sha1($password), $email, $gender, $age, $url, NULL, $id]);
     //$affectedRow = $update->fetch();
     // return $affectedRow;
 

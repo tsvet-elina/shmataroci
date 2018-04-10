@@ -1,12 +1,13 @@
 <?php
+session_start();
 require_once "../models/admin.php";
 if(isset($_GET["info"])){
 
     // load table
 
     if($_GET["info"] == "users"){
-
-        $selectUser = selectUser();
+        $admin_id = $_SESSION["user"]["id"];
+        $selectUser = selectUser($admin_id);
         echo json_encode($selectUser);
 
     }
@@ -96,6 +97,7 @@ if(isset($_POST['add'])){
 
           $img = $_FILES['placeimg']['tmp_name'];
           $name = $_POST["placename"];
+          $radiob = $_POST["type"];
             function transliterate($textcyr = null, $textlat = null) {
                 $cyr = array(
                     'ж',  'ч',  'щ',   'ш',  'ю',  'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ъ', 'ь', 'я',
@@ -119,7 +121,7 @@ if(isset($_POST['add'])){
           $desc = $_POST['desc'];
           $image = "assets/image_places/".transliterate($name).".jpg";
           $addedBy = $_SESSION['user']['id'];
-          addPlace($placeName, $desc, $addedBy, $image);
+          addPlace($placeName, $desc, $addedBy, $image, $radiob);
             header("location:../views/admin/index_admin.html");
 
 

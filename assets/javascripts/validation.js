@@ -30,17 +30,17 @@ function validRegistration(form) {
     }
 
 
-    if (form.email.value === "") {
-        var error = ("<p>Попълнете имейл</p>");
-        document.getElementById('emailError').style.visibility = 'visible';
-        document.getElementById('emailError').innerHTML += error;
-        noErrors = false;
-    } else if (!reEmail.test(form.email.value)) {
-        var error = ("<p>Въведете валиден имейл</p>");
-        document.getElementById('emailError').style.visibility = 'visible';
-        document.getElementById('emailError').innerHTML += error;
-        noErrors = false;
-    }
+    // if (form.email.value === "") {
+    //     var error = ("<p>Попълнете magdata имейл</p>");
+    //     document.getElementById('emailError').style.visibility = 'visible';
+    //     document.getElementById('emailError').innerHTML += error;
+    //     noErrors = false;
+    // } else if (!reEmail.test(form.email.value)) {
+    //     var error = ("<p>Въведете валиден имейл</p>");
+    //     document.getElementById('emailError').style.visibility = 'visible';
+    //     document.getElementById('emailError').innerHTML += error;
+    //     noErrors = false;
+    // }
 
 
     if (form.pass.value === "") {

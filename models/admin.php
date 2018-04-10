@@ -2,11 +2,11 @@
 
 //Select users
 
-function selectUser(){
+function selectUser($admin_id){
     include_once("db_model.php");
     $result = [];
-    $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users ");
-    $statement->execute();
+    $statement = $pdo->prepare("SELECT id, username, email, gender, age FROM users WHERE id != ? ");
+    $statement->execute([$admin_id]);
     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
         $result[] = $row;
     }
@@ -94,11 +94,11 @@ function deleteComment($comment_id){
 
 //Add place
 
-function addPlace($placeName, $desc, $addedBy, $image){
+function addPlace($placeName, $desc, $addedBy, $image, $radiob){
     include_once("db_model.php");
-    $del = $pdo->prepare("INSERT INTO places (place_name, description, place_like, place_added_by, checked_by_admin, image)
-                          VALUES (?,?, 0 ,?, 1 ,?);");
-    $del->execute([$placeName,$desc,$addedBy,$image]);
+    $del = $pdo->prepare("INSERT INTO places (place_name, description, place_like, place_added_by, category, checked_by_admin, image)
+                          VALUES (?,?, 0 ,?, ?, 1 ,?);");
+    $del->execute([$placeName,$desc,$addedBy,$radiob, $image]);
 }
 
 //statistic gender

@@ -41,7 +41,7 @@ if (isset($_POST["edit"])) {
         $_SESSION["user"]["email"] = $email;
     }
 
-    $result = editUserData($username, $password, $email, $gender, $age, $url, $_SESSION["user"]["id"]);
+    $result = editUserData($username, $_SESSION["user"]["password"], $email, $_SESSION["user"]["gender"], $age, $_SESSION["user"]["image"], $_SESSION["user"]["id"]);
     header("location:../index.php?page=edit");
 }
 
